@@ -219,9 +219,10 @@ main {
 }
 
 .itemIcon {
-    width: 64px;
-    height: 64px;
+    width: 80px;
+    height: 80px;
     object-fit: contain;
+    object-position: center;
     border-radius: 8px;
     display: block;
     margin-bottom: 14px;
@@ -477,6 +478,28 @@ tr:last-child td {
 }
 
 /* =========================
+   TRADE ITEMS
+========================= */
+
+.tradeItem {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 9px 0;
+    color: #e0e0e6;
+}
+
+.tradeItem input {
+    width: auto;
+    margin: 0;
+}
+
+.tradeItemId {
+    color: var(--muted);
+    font-size: 12px;
+}
+
+/* =========================
    TOAST
 ========================= */
 
@@ -546,6 +569,7 @@ tr:last-child td {
 ========================= */
 
 @media (max-width: 700px) {
+
     header {
         height: auto;
     }
@@ -584,10 +608,13 @@ tr:last-child td {
 ========================= -->
 
 <div id="termsOverlay">
+
     <div class="termsBox">
+
         <h2>Правила использования RedstoneGifts</h2>
 
         <div class="termsText">
+
             Используя RedstoneGifts, вы соглашаетесь с тем, что администрация
             не несёт ответственности за потерю виртуальных предметов,
             RedstoneCoin, данных аккаунта или за последствия использования
@@ -603,13 +630,17 @@ tr:last-child td {
 
             Продолжая использование сайта, вы подтверждаете, что ознакомились
             с данным уведомлением.
+
         </div>
 
         <button class="primary termsButton" id="termsAccept">
             ОК
         </button>
+
     </div>
+
 </div>
+
 
 <!-- =========================
      AUTH
@@ -624,6 +655,7 @@ tr:last-child td {
         </div>
 
         <div class="authTabs">
+
             <button class="authTab active" id="loginTab">
                 Вход
             </button>
@@ -631,12 +663,15 @@ tr:last-child td {
             <button class="authTab" id="registerTab">
                 Регистрация
             </button>
+
         </div>
 
         <form id="authForm">
 
             <div class="formGroup">
+
                 <label>Minecraft ник</label>
+
                 <input
                     id="authNick"
                     type="text"
@@ -644,10 +679,13 @@ tr:last-child td {
                     autocomplete="username"
                     required
                 >
+
             </div>
 
             <div class="formGroup">
+
                 <label>Пароль</label>
+
                 <input
                     id="authPassword"
                     type="password"
@@ -655,16 +693,23 @@ tr:last-child td {
                     autocomplete="current-password"
                     required
                 >
+
             </div>
 
-            <button class="primary" style="width:100%;" id="authSubmit">
+            <button
+                class="primary"
+                style="width:100%;"
+                id="authSubmit"
+            >
                 Войти
             </button>
 
         </form>
+
     </div>
 
 </div>
+
 
 <!-- =========================
      APP
@@ -673,6 +718,7 @@ tr:last-child td {
 <div id="app" class="hidden">
 
 <header>
+
     <div class="headerInner">
 
         <div class="logo">
@@ -693,27 +739,44 @@ tr:last-child td {
         </div>
 
     </div>
+
 </header>
+
 
 <nav>
 
-    <button class="navButton active" data-section="shopSection">
+    <button
+        class="navButton active"
+        data-section="shopSection"
+    >
         Магазин
     </button>
 
-    <button class="navButton" data-section="inventorySection">
+    <button
+        class="navButton"
+        data-section="inventorySection"
+    >
         Инвентарь
     </button>
 
-    <button class="navButton" data-section="withdrawSection">
+    <button
+        class="navButton"
+        data-section="withdrawSection"
+    >
         Мои запросы на вывод
     </button>
 
-    <button class="navButton" data-section="tradesSection">
+    <button
+        class="navButton"
+        data-section="tradesSection"
+    >
         Трейды
     </button>
 
-    <button class="navButton" data-section="messagesSection">
+    <button
+        class="navButton"
+        data-section="messagesSection"
+    >
         Сообщения
     </button>
 
@@ -727,41 +790,67 @@ tr:last-child td {
 
 </nav>
 
+
 <main>
 
-<!-- SHOP -->
+<!-- =========================
+     SHOP
+========================= -->
 
-<section class="section active" id="shopSection">
+<section
+    class="section active"
+    id="shopSection"
+>
 
-    <h1 class="sectionTitle">Магазин</h1>
+    <h1 class="sectionTitle">
+        Магазин
+    </h1>
 
     <p class="sectionDescription">
         Предметы, доступные для покупки.
     </p>
 
-    <div id="shopGrid" class="grid"></div>
+    <div
+        id="shopGrid"
+        class="grid"
+    ></div>
 
 </section>
 
 
-<!-- INVENTORY -->
+<!-- =========================
+     INVENTORY
+========================= -->
 
-<section class="section" id="inventorySection">
+<section
+    class="section"
+    id="inventorySection"
+>
 
-    <h1 class="sectionTitle">Инвентарь</h1>
+    <h1 class="sectionTitle">
+        Инвентарь
+    </h1>
 
     <p class="sectionDescription">
         Предметы, которыми вы владеете.
     </p>
 
-    <div id="inventoryGrid" class="grid"></div>
+    <div
+        id="inventoryGrid"
+        class="grid"
+    ></div>
 
 </section>
 
 
-<!-- WITHDRAWALS -->
+<!-- =========================
+     WITHDRAWALS
+========================= -->
 
-<section class="section" id="withdrawSection">
+<section
+    class="section"
+    id="withdrawSection"
+>
 
     <h1 class="sectionTitle">
         Мои запросы на вывод
@@ -776,41 +865,72 @@ tr:last-child td {
 </section>
 
 
-<!-- TRADES -->
+<!-- =========================
+     TRADES
+========================= -->
 
-<section class="section" id="tradesSection">
+<section
+    class="section"
+    id="tradesSection"
+>
 
-    <h1 class="sectionTitle">Трейды</h1>
+    <h1 class="sectionTitle">
+        Трейды
+    </h1>
 
     <p class="sectionDescription">
         Обменивайте свои предметы на предметы другого игрока.
     </p>
 
-    <div class="formBox" style="margin-bottom:20px;">
+    <div
+        class="formBox"
+        style="margin-bottom:20px;"
+    >
 
         <h3 style="margin-top:0;">
             Новый трейд
         </h3>
 
         <div class="formGroup">
-            <label>Ник игрока</label>
-            <input id="tradeTargetNick" type="text">
+
+            <label>
+                Ник игрока
+            </label>
+
+            <input
+                id="tradeTargetNick"
+                type="text"
+            >
+
         </div>
 
         <div class="formGroup">
-            <label>Ваши предметы</label>
+
+            <label>
+                Ваши предметы
+            </label>
+
             <div id="tradeMyItems"></div>
+
         </div>
 
         <div class="formGroup">
-            <label>Предметы другого игрока</label>
+
+            <label>
+                Предметы другого игрока
+            </label>
+
             <textarea
                 id="tradeTheirItems"
                 placeholder="Введите ID предметов через запятую"
             ></textarea>
+
         </div>
 
-        <button class="primary" id="createTradeButton">
+        <button
+            class="primary"
+            id="createTradeButton"
+        >
             Кинуть запрос на трейд
         </button>
 
@@ -821,11 +941,18 @@ tr:last-child td {
 </section>
 
 
-<!-- MESSAGES -->
+<!-- =========================
+     MESSAGES
+========================= -->
 
-<section class="section" id="messagesSection">
+<section
+    class="section"
+    id="messagesSection"
+>
 
-    <h1 class="sectionTitle">Сообщения</h1>
+    <h1 class="sectionTitle">
+        Сообщения
+    </h1>
 
     <p class="sectionDescription">
         Уведомления от администрации и игроков.
@@ -836,37 +963,62 @@ tr:last-child td {
 </section>
 
 
-<!-- ADMIN -->
+<!-- =========================
+     ADMIN
+========================= -->
 
-<section class="section" id="adminSection">
+<section
+    class="section"
+    id="adminSection"
+>
 
-    <h1 class="sectionTitle">Админ-панель</h1>
+    <h1 class="sectionTitle">
+        Админ-панель
+    </h1>
 
     <p class="sectionDescription">
         Управление RedstoneGifts.
     </p>
+
 
     <div class="adminGrid">
 
         <!-- USERS -->
 
         <div class="adminBox">
-            <h3>Пользователи</h3>
+
+            <h3>
+                Пользователи
+            </h3>
 
             <div class="formGroup">
-                <label>Ник игрока</label>
+
+                <label>
+                    Ник игрока
+                </label>
+
                 <input id="adminUserNick">
+
             </div>
 
-            <div style="display:flex; gap:8px;">
-                <button class="danger" id="banButton">
+            <div style="display:flex;gap:8px;">
+
+                <button
+                    class="danger"
+                    id="banButton"
+                >
                     Бан
                 </button>
 
-                <button class="success" id="unbanButton">
+                <button
+                    class="success"
+                    id="unbanButton"
+                >
                     Разбан
                 </button>
+
             </div>
+
         </div>
 
 
@@ -874,24 +1026,48 @@ tr:last-child td {
 
         <div class="adminBox">
 
-            <h3>Выдать RedstoneCoin</h3>
+            <h3>
+                Выдать RedstoneCoin
+            </h3>
 
             <div class="formGroup">
-                <label>Ник игрока</label>
+
+                <label>
+                    Ник игрока
+                </label>
+
                 <input id="giveCoinsNick">
+
             </div>
 
             <div class="formGroup">
-                <label>Количество</label>
-                <input id="giveCoinsAmount" type="number" min="1">
+
+                <label>
+                    Количество
+                </label>
+
+                <input
+                    id="giveCoinsAmount"
+                    type="number"
+                    min="1"
+                >
+
             </div>
 
             <div class="formGroup">
-                <label>Причина</label>
+
+                <label>
+                    Причина
+                </label>
+
                 <textarea id="giveCoinsReason"></textarea>
+
             </div>
 
-            <button class="primary" id="giveCoinsButton">
+            <button
+                class="primary"
+                id="giveCoinsButton"
+            >
                 Выдать RedstoneCoin
             </button>
 
@@ -902,24 +1078,44 @@ tr:last-child td {
 
         <div class="adminBox">
 
-            <h3>Выдать предмет</h3>
+            <h3>
+                Выдать предмет
+            </h3>
 
             <div class="formGroup">
-                <label>Ник игрока</label>
+
+                <label>
+                    Ник игрока
+                </label>
+
                 <input id="giveItemNick">
+
             </div>
 
             <div class="formGroup">
-                <label>Предмет</label>
+
+                <label>
+                    Предмет
+                </label>
+
                 <select id="giveItemSelect"></select>
+
             </div>
 
             <div class="formGroup">
-                <label>Причина</label>
+
+                <label>
+                    Причина
+                </label>
+
                 <textarea id="giveItemReason"></textarea>
+
             </div>
 
-            <button class="primary" id="giveItemButton">
+            <button
+                class="primary"
+                id="giveItemButton"
+            >
                 Выдать предмет
             </button>
 
@@ -930,34 +1126,58 @@ tr:last-child td {
 
         <div class="adminBox">
 
-            <h3>Добавить предмет</h3>
+            <h3>
+                Добавить предмет
+            </h3>
 
             <div class="formGroup">
-                <label>ID</label>
-                <input id="addItemId" type="number">
+
+                <label>
+                    ID
+                </label>
+
+                <input id="addItemId">
+
             </div>
 
             <div class="formGroup">
-                <label>Название</label>
+
+                <label>
+                    Название
+                </label>
+
                 <input id="addItemName">
+
             </div>
 
             <div class="formGroup">
-                <label>Иконка</label>
+
+                <label>
+                    Иконка
+                </label>
+
                 <input id="addItemIcon">
+
             </div>
 
             <div class="formGroup">
-                <label>Minecraft ID</label>
-                <input id="addItemMinecraftId">
+
+                <label>
+                    Цена
+                </label>
+
+                <input
+                    id="addItemPrice"
+                    type="number"
+                    min="0"
+                >
+
             </div>
 
-            <div class="formGroup">
-                <label>Цена</label>
-                <input id="addItemPrice" type="number" min="0">
-            </div>
-
-            <button class="primary" id="addItemButton">
+            <button
+                class="primary"
+                id="addItemButton"
+            >
                 Добавить
             </button>
 
@@ -968,34 +1188,58 @@ tr:last-child td {
 
         <div class="adminBox">
 
-            <h3>Изменить предмет</h3>
+            <h3>
+                Изменить предмет
+            </h3>
 
             <div class="formGroup">
-                <label>ID предмета</label>
-                <input id="editItemId" type="number">
+
+                <label>
+                    ID предмета
+                </label>
+
+                <input id="editItemId">
+
             </div>
 
             <div class="formGroup">
-                <label>Название</label>
+
+                <label>
+                    Название
+                </label>
+
                 <input id="editItemName">
+
             </div>
 
             <div class="formGroup">
-                <label>Иконка</label>
+
+                <label>
+                    Иконка
+                </label>
+
                 <input id="editItemIcon">
+
             </div>
 
             <div class="formGroup">
-                <label>Minecraft ID</label>
-                <input id="editItemMinecraftId">
+
+                <label>
+                    Цена
+                </label>
+
+                <input
+                    id="editItemPrice"
+                    type="number"
+                    min="0"
+                >
+
             </div>
 
-            <div class="formGroup">
-                <label>Цена</label>
-                <input id="editItemPrice" type="number" min="0">
-            </div>
-
-            <button class="primary" id="editItemButton">
+            <button
+                class="primary"
+                id="editItemButton"
+            >
                 Изменить
             </button>
 
@@ -1003,21 +1247,33 @@ tr:last-child td {
 
     </div>
 
+
     <div style="height:25px;"></div>
 
-    <h2>Предметы</h2>
+
+    <h2>
+        Предметы
+    </h2>
 
     <div id="adminItemsList"></div>
 
+
     <div style="height:25px;"></div>
 
-    <h2>Запросы на вывод</h2>
+
+    <h2>
+        Запросы на вывод
+    </h2>
 
     <div id="adminWithdrawalsList"></div>
 
+
     <div style="height:25px;"></div>
 
-    <h2>Пользователи</h2>
+
+    <h2>
+        Пользователи
+    </h2>
 
     <div id="adminUsersList"></div>
 
@@ -1032,7 +1288,10 @@ tr:last-child td {
      MODAL
 ========================= -->
 
-<div id="modalOverlay" class="modalOverlay hidden">
+<div
+    id="modalOverlay"
+    class="modalOverlay hidden"
+>
 
     <div class="modal">
 
@@ -1044,11 +1303,17 @@ tr:last-child td {
 
         <div class="modalActions">
 
-            <button class="secondary" id="modalCancel">
+            <button
+                class="secondary"
+                id="modalCancel"
+            >
                 Отмена
             </button>
 
-            <button class="primary" id="modalConfirm">
+            <button
+                class="primary"
+                id="modalConfirm"
+            >
                 Подтвердить
             </button>
 
@@ -1126,7 +1391,9 @@ document
 
         button.addEventListener("click", () => {
 
-            if (termsOverlay.classList.contains("hidden") === false) {
+            if (
+                termsOverlay.classList.contains("hidden") === false
+            ) {
                 return;
             }
 
@@ -1185,6 +1452,7 @@ async function loadSection(section) {
         }
 
         if (section === "adminSection") {
+
             if (!currentIsAdmin) {
                 showToast("Нет доступа", true);
                 return;
@@ -1194,7 +1462,11 @@ async function loadSection(section) {
         }
 
     } catch (error) {
-        showToast(error.message, true);
+
+        showToast(
+            error.message,
+            true
+        );
     }
 }
 
@@ -1211,6 +1483,7 @@ async function api(path, options = {}) {
     };
 
     if (authToken) {
+
         headers.Authorization =
             "Bearer " + authToken;
     }
@@ -1233,8 +1506,12 @@ async function api(path, options = {}) {
     if (!response.ok) {
 
         if (response.status === 401) {
+
             authToken = null;
-            sessionStorage.removeItem("rg_token");
+
+            sessionStorage.removeItem(
+                "rg_token"
+            );
 
             currentUser = null;
             currentIsAdmin = false;
@@ -1267,7 +1544,8 @@ async function initialize() {
             if (data.user) {
 
                 currentUser = data.user;
-                currentIsAdmin = Boolean(data.isAdmin);
+                currentIsAdmin =
+                    Boolean(data.isAdmin);
 
                 showApp();
 
@@ -1277,8 +1555,12 @@ async function initialize() {
             }
 
         } catch {
+
             authToken = null;
-            sessionStorage.removeItem("rg_token");
+
+            sessionStorage.removeItem(
+                "rg_token"
+            );
         }
     }
 
@@ -1326,7 +1608,8 @@ document
 
         document
             .getElementById("authSubmit")
-            .textContent = "Зарегистрироваться";
+            .textContent =
+                "Зарегистрироваться";
     });
 
 
@@ -1362,6 +1645,7 @@ document
                         : "/api/register",
                     {
                         method: "POST",
+
                         body: JSON.stringify({
                             minecraftNick,
                             password
@@ -1371,7 +1655,8 @@ document
 
             if (data.token) {
 
-                authToken = data.token;
+                authToken =
+                    data.token;
 
                 sessionStorage.setItem(
                     "rg_token",
@@ -1379,13 +1664,17 @@ document
                 );
             }
 
-            currentUser = data.user;
+            currentUser =
+                data.user;
 
             const me =
                 await api("/api/me");
 
-            currentUser = me.user;
-            currentIsAdmin = Boolean(me.isAdmin);
+            currentUser =
+                me.user;
+
+            currentIsAdmin =
+                Boolean(me.isAdmin);
 
             showToast(
                 authMode === "login"
@@ -1400,7 +1689,10 @@ document
 
         } catch (error) {
 
-            showToast(error.message, true);
+            showToast(
+                error.message,
+                true
+            );
 
         } finally {
 
@@ -1441,7 +1733,9 @@ function updateBalance() {
 
     balanceValue.textContent =
         currentUser
-            ? Number(currentUser.redstoneCoins || 0).toLocaleString("ru-RU")
+            ? Number(
+                currentUser.redstoneCoins || 0
+            ).toLocaleString("ru-RU")
             : "0";
 }
 
@@ -1460,7 +1754,9 @@ document
 
         authToken = null;
 
-        sessionStorage.removeItem("rg_token");
+        sessionStorage.removeItem(
+            "rg_token"
+        );
 
         currentUser = null;
         currentIsAdmin = false;
@@ -1478,8 +1774,11 @@ async function refreshMe() {
     const data =
         await api("/api/me");
 
-    currentUser = data.user;
-    currentIsAdmin = Boolean(data.isAdmin);
+    currentUser =
+        data.user;
+
+    currentIsAdmin =
+        Boolean(data.isAdmin);
 
     updateBalance();
 
@@ -1524,12 +1823,15 @@ async function loadShop() {
     const data =
         await api("/api/shop");
 
-    const items = data.items || [];
+    const items =
+        data.items || [];
 
     if (!items.length) {
 
         container.innerHTML =
-            `<div class="empty">Сейчас нет предметов в продаже.</div>`;
+            `<div class="empty">
+                Сейчас нет предметов в продаже.
+            </div>`;
 
         return;
     }
@@ -1555,11 +1857,6 @@ async function loadShop() {
                 ${escapeHtml(item.name)}
             </div>
 
-            <div class="itemMeta">
-                Minecraft ID:
-                ${escapeHtml(item.minecraft_id)}
-            </div>
-
             <div class="itemPrice">
                 ${Number(item.price).toLocaleString("ru-RU")} RC
             </div>
@@ -1567,7 +1864,7 @@ async function loadShop() {
             <button
                 class="primary"
                 style="width:100%;"
-                data-buy="${item.id}"
+                data-buy="${escapeAttr(item.id)}"
             >
                 Купить
             </button>
@@ -1576,57 +1873,67 @@ async function loadShop() {
         container.appendChild(card);
     });
 
+
     container
         .querySelectorAll("[data-buy]")
         .forEach(button => {
 
-            button.addEventListener("click", () => {
+            button.addEventListener(
+                "click",
+                () => {
 
-                const itemId =
-                    Number(button.dataset.buy);
+                    const itemId =
+                        button.dataset.buy;
 
-                confirmModal(
-                    "Покупка предмета",
-                    "Вы уверены, что хотите купить этот предмет?",
-                    async () => {
+                    confirmModal(
+                        "Покупка предмета",
+                        "Вы уверены, что хотите купить этот предмет?",
+                        async () => {
 
-                        button.disabled = true;
+                            button.disabled = true;
 
-                        try {
+                            try {
 
-                            const data =
-                                await api("/api/buy", {
-                                    method: "POST",
-                                    body: JSON.stringify({
-                                        itemId
-                                    })
-                                });
+                                const data =
+                                    await api(
+                                        "/api/buy",
+                                        {
+                                            method: "POST",
 
-                            currentUser.redstoneCoins =
-                                data.redstoneCoins;
+                                            body:
+                                                JSON.stringify({
+                                                    itemId
+                                                })
+                                        }
+                                    );
 
-                            updateBalance();
+                                currentUser.redstoneCoins =
+                                    data.redstoneCoins;
 
-                            showToast(
-                                "Предмет куплен",
-                                false
-                            );
+                                updateBalance();
 
-                            await loadShop();
-                            await loadInventory();
+                                showToast(
+                                    "Предмет куплен",
+                                    false
+                                );
 
-                        } catch (error) {
+                                await loadShop();
+                                await loadInventory();
 
-                            showToast(
-                                error.message,
-                                true
-                            );
+                            } catch (error) {
 
-                            button.disabled = false;
+                                showToast(
+                                    error.message,
+                                    true
+                                );
+
+                                button.disabled =
+                                    false;
+                            }
                         }
-                    }
-                );
-            });
+                    );
+                }
+            );
         });
 }
 
@@ -1638,7 +1945,9 @@ async function loadShop() {
 async function loadInventory() {
 
     const container =
-        document.getElementById("inventoryGrid");
+        document.getElementById(
+            "inventoryGrid"
+        );
 
     container.innerHTML =
         `<div class="empty">Загрузка...</div>`;
@@ -1646,7 +1955,8 @@ async function loadInventory() {
     const data =
         await api("/api/inventory");
 
-    const items = data.items || [];
+    const items =
+        data.items || [];
 
     if (!items.length) {
 
@@ -1679,23 +1989,18 @@ async function loadInventory() {
                 ${escapeHtml(item.name)}
             </div>
 
-            <div class="itemMeta">
-                Minecraft ID:
-                ${escapeHtml(item.minecraft_id)}
-            </div>
-
             <div style="display:flex;gap:7px;flex-wrap:wrap;">
 
                 <button
                     class="primary"
-                    data-withdraw="${item.inventory_id}"
+                    data-withdraw="${escapeAttr(item.inventory_id)}"
                 >
                     Вывести
                 </button>
 
                 <button
                     class="secondary"
-                    data-trade="${item.inventory_id}"
+                    data-trade="${escapeAttr(item.inventory_id)}"
                 >
                     Затрейдить
                 </button>
@@ -1706,72 +2011,90 @@ async function loadInventory() {
         container.appendChild(card);
     });
 
+
     container
         .querySelectorAll("[data-withdraw]")
         .forEach(button => {
 
-            button.addEventListener("click", () => {
+            button.addEventListener(
+                "click",
+                () => {
 
-                const inventoryId =
-                    Number(button.dataset.withdraw);
+                    const inventoryId =
+                        button.dataset.withdraw;
 
-                confirmModal(
-                    "Вывод предмета",
-                    "Создать запрос на вывод этого предмета?",
-                    async () => {
+                    confirmModal(
+                        "Вывод предмета",
+                        "Создать запрос на вывод этого предмета?",
+                        async () => {
 
-                        try {
+                            try {
 
-                            await api("/api/withdraw", {
-                                method: "POST",
-                                body: JSON.stringify({
-                                    inventoryId
-                                })
-                            });
+                                await api(
+                                    "/api/withdraw",
+                                    {
+                                        method: "POST",
 
-                            showToast(
-                                "Запрос на вывод создан",
-                                false
-                            );
+                                        body:
+                                            JSON.stringify({
+                                                inventoryId
+                                            })
+                                    }
+                                );
 
-                            await loadInventory();
-                            await loadWithdrawals();
+                                showToast(
+                                    "Запрос на вывод создан",
+                                    false
+                                );
 
-                        } catch (error) {
+                                await loadInventory();
+                                await loadWithdrawals();
 
-                            showToast(
-                                error.message,
-                                true
-                            );
+                            } catch (error) {
+
+                                showToast(
+                                    error.message,
+                                    true
+                                );
+                            }
                         }
-                    }
-                );
-            });
+                    );
+                }
+            );
         });
+
 
     container
         .querySelectorAll("[data-trade]")
         .forEach(button => {
 
-            button.addEventListener("click", () => {
+            button.addEventListener(
+                "click",
+                () => {
 
-                document
-                    .querySelector('[data-section="tradesSection"]')
-                    .click();
+                    document
+                        .querySelector(
+                            '[data-section="tradesSection"]'
+                        )
+                        .click();
 
-                setTimeout(() => {
+                    setTimeout(() => {
 
-                    const checkbox =
-                        document.querySelector(
-                            `[data-trade-checkbox="${button.dataset.trade}"]`
-                        );
+                        const inventoryId =
+                            button.dataset.trade;
 
-                    if (checkbox) {
-                        checkbox.checked = true;
-                    }
+                        const checkbox =
+                            document.querySelector(
+                                `[data-trade-checkbox="${CSS.escape(inventoryId)}"]`
+                            );
 
-                }, 100);
-            });
+                        if (checkbox) {
+                            checkbox.checked = true;
+                        }
+
+                    }, 100);
+                }
+            );
         });
 }
 
@@ -1783,7 +2106,9 @@ async function loadInventory() {
 async function loadWithdrawals() {
 
     const container =
-        document.getElementById("withdrawalsList");
+        document.getElementById(
+            "withdrawalsList"
+        );
 
     container.innerHTML =
         `<div class="empty">Загрузка...</div>`;
@@ -1850,7 +2175,9 @@ async function loadWithdrawals() {
 async function loadMessages() {
 
     const container =
-        document.getElementById("messagesList");
+        document.getElementById(
+            "messagesList"
+        );
 
     container.innerHTML =
         `<div class="empty">Загрузка...</div>`;
@@ -1882,15 +2209,21 @@ async function loadMessages() {
 
         box.innerHTML = `
             <div class="messageTitle">
-                ${escapeHtml(message.title || "Сообщение")}
+                ${escapeHtml(
+                    message.title || "Сообщение"
+                )}
             </div>
 
             <div class="messageContent">
-                ${escapeHtml(message.content || "")}
+                ${escapeHtml(
+                    message.content || ""
+                )}
             </div>
 
             <div class="messageDate">
-                ${formatDate(message.created_at)}
+                ${formatDate(
+                    message.created_at
+                )}
             </div>
         `;
 
@@ -1906,7 +2239,9 @@ async function loadMessages() {
 async function loadTradeItems() {
 
     const container =
-        document.getElementById("tradeMyItems");
+        document.getElementById(
+            "tradeMyItems"
+        );
 
     const data =
         await api("/api/inventory");
@@ -1931,18 +2266,23 @@ async function loadTradeItems() {
         const label =
             document.createElement("label");
 
-        label.style.display = "block";
-        label.style.padding = "8px 0";
+        label.className =
+            "tradeItem";
 
         label.innerHTML = `
             <input
                 type="checkbox"
-                value="${item.inventory_id}"
-                data-trade-checkbox="${item.inventory_id}"
-                style="width:auto;margin-right:8px;"
+                value="${escapeAttr(item.inventory_id)}"
+                data-trade-checkbox="${escapeAttr(item.inventory_id)}"
             >
-            ${escapeHtml(item.name)}
-            (#${item.inventory_id})
+
+            <span>
+                ${escapeHtml(item.name)}
+            </span>
+
+            <span class="tradeItemId">
+                (#${escapeHtml(item.inventory_id)})
+            </span>
         `;
 
         container.appendChild(label);
@@ -1953,7 +2293,9 @@ async function loadTradeItems() {
 async function loadTrades() {
 
     const container =
-        document.getElementById("tradesList");
+        document.getElementById(
+            "tradesList"
+        );
 
     container.innerHTML =
         `<div class="empty">Загрузка...</div>`;
@@ -1984,7 +2326,8 @@ async function loadTrades() {
         box.className = "message";
 
         const incoming =
-            trade.receiver_id === currentUser.id;
+            trade.receiver_id ===
+            currentUser.id;
 
         let actions = "";
 
@@ -1994,18 +2337,24 @@ async function loadTrades() {
         ) {
 
             actions = `
-                <div style="display:flex;gap:8px;margin-top:13px;">
+                <div
+                    style="
+                        display:flex;
+                        gap:8px;
+                        margin-top:13px;
+                    "
+                >
 
                     <button
                         class="success"
-                        data-accept-trade="${trade.id}"
+                        data-accept-trade="${escapeAttr(trade.id)}"
                     >
                         Принять
                     </button>
 
                     <button
                         class="danger"
-                        data-decline-trade="${trade.id}"
+                        data-decline-trade="${escapeAttr(trade.id)}"
                     >
                         Отклонить
                     </button>
@@ -2016,25 +2365,36 @@ async function loadTrades() {
 
         box.innerHTML = `
             <div class="messageTitle">
-                Трейд #${trade.id}
+                Трейд #${escapeHtml(trade.id)}
             </div>
 
             <div class="messageContent">
-                ${incoming
-                    ? "От игрока: " + escapeHtml(trade.sender_nick)
-                    : "Игрок: " + escapeHtml(trade.receiver_nick)
+
+                ${
+                    incoming
+                        ? "От игрока: " +
+                          escapeHtml(
+                              trade.sender_nick
+                          )
+                        : "Игрок: " +
+                          escapeHtml(
+                              trade.receiver_nick
+                          )
                 }
 
                 <br>
 
                 Статус:
                 ${escapeHtml(trade.status)}
+
             </div>
 
             ${actions}
 
             <div class="messageDate">
-                ${formatDate(trade.created_at)}
+                ${formatDate(
+                    trade.created_at
+                )}
             </div>
         `;
 
@@ -2043,143 +2403,215 @@ async function loadTrades() {
 
 
     container
-        .querySelectorAll("[data-accept-trade]")
+        .querySelectorAll(
+            "[data-accept-trade]"
+        )
         .forEach(button => {
 
-            button.addEventListener("click", async () => {
+            button.addEventListener(
+                "click",
+                async () => {
 
-                try {
+                    try {
 
-                    await api("/api/trades/accept", {
-                        method: "POST",
-                        body: JSON.stringify({
-                            tradeId:
-                                Number(button.dataset.acceptTrade)
-                        })
-                    });
+                        await api(
+                            "/api/trades/accept",
+                            {
+                                method: "POST",
 
-                    showToast(
-                        "Трейд принят",
-                        false
-                    );
+                                body:
+                                    JSON.stringify({
+                                        tradeId:
+                                            button.dataset
+                                                .acceptTrade
+                                    })
+                            }
+                        );
 
-                    await loadTrades();
-                    await loadInventory();
+                        showToast(
+                            "Трейд принят",
+                            false
+                        );
 
-                } catch (error) {
+                        await loadTrades();
+                        await loadInventory();
 
-                    showToast(
-                        error.message,
-                        true
-                    );
+                    } catch (error) {
+
+                        showToast(
+                            error.message,
+                            true
+                        );
+                    }
                 }
-            });
+            );
         });
 
 
     container
-        .querySelectorAll("[data-decline-trade]")
+        .querySelectorAll(
+            "[data-decline-trade]"
+        )
         .forEach(button => {
 
-            button.addEventListener("click", async () => {
+            button.addEventListener(
+                "click",
+                async () => {
 
-                try {
+                    try {
 
-                    await api("/api/trades/decline", {
-                        method: "POST",
-                        body: JSON.stringify({
-                            tradeId:
-                                Number(button.dataset.declineTrade)
-                        })
-                    });
+                        await api(
+                            "/api/trades/decline",
+                            {
+                                method: "POST",
 
-                    showToast(
-                        "Трейд отклонён",
-                        false
-                    );
+                                body:
+                                    JSON.stringify({
+                                        tradeId:
+                                            button.dataset
+                                                .declineTrade
+                                    })
+                            }
+                        );
 
-                    await loadTrades();
+                        showToast(
+                            "Трейд отклонён",
+                            false
+                        );
 
-                } catch (error) {
+                        await loadTrades();
 
-                    showToast(
-                        error.message,
-                        true
-                    );
+                    } catch (error) {
+
+                        showToast(
+                            error.message,
+                            true
+                        );
+                    }
                 }
-            });
+            );
         });
 }
 
 
+/* =========================
+   CREATE TRADE
+========================= */
+
 document
     .getElementById("createTradeButton")
-    .addEventListener("click", async () => {
+    .addEventListener(
+        "click",
+        async () => {
 
-        const targetMinecraftNick =
-            document
-                .getElementById("tradeTargetNick")
-                .value
-                .trim();
+            const targetMinecraftNick =
+                document
+                    .getElementById(
+                        "tradeTargetNick"
+                    )
+                    .value
+                    .trim();
 
-        const myInventoryIds =
-            [...document.querySelectorAll(
-                "[data-trade-checkbox]:checked"
-            )]
-            .map(x => Number(x.value));
 
-        const theirText =
-            document
-                .getElementById("tradeTheirItems")
-                .value
-                .trim();
+            /*
+             * inventory.id - UUID.
+             * Нельзя использовать Number().
+             */
 
-        const theirInventoryIds =
-            theirText
-                ? theirText
-                    .split(",")
-                    .map(x => Number(x.trim()))
-                    .filter(Number.isInteger)
-                : [];
+            const myInventoryIds =
+                [
+                    ...document.querySelectorAll(
+                        "[data-trade-checkbox]:checked"
+                    )
+                ]
+                .map(
+                    x => x.value
+                );
 
-        try {
 
-            await api("/api/trades/create", {
-                method: "POST",
-                body: JSON.stringify({
-                    targetMinecraftNick,
-                    myInventoryIds,
-                    theirInventoryIds
-                })
-            });
+            const theirText =
+                document
+                    .getElementById(
+                        "tradeTheirItems"
+                    )
+                    .value
+                    .trim();
 
-            showToast(
-                "Запрос на трейд отправлен",
-                false
-            );
 
-            document
-                .getElementById("tradeTargetNick")
-                .value = "";
+            /*
+             * ID предметов другого игрока
+             * тоже передаются как строки.
+             */
 
-            document
-                .getElementById("tradeTheirItems")
-                .value = "";
+            const theirInventoryIds =
+                theirText
+                    ? theirText
+                        .split(",")
+                        .map(
+                            x => x.trim()
+                        )
+                        .filter(
+                            Boolean
+                        )
+                    : [];
 
-            document
-                .querySelectorAll("[data-trade-checkbox]")
-                .forEach(x => x.checked = false);
 
-            await loadTrades();
+            try {
 
-        } catch (error) {
+                await api(
+                    "/api/trades/create",
+                    {
+                        method: "POST",
 
-            showToast(
-                error.message,
-                true
-            );
+                        body:
+                            JSON.stringify({
+                                targetMinecraftNick,
+                                myInventoryIds,
+                                theirInventoryIds
+                            })
+                    }
+                );
+
+                showToast(
+                    "Запрос на трейд отправлен",
+                    false
+                );
+
+
+                document
+                    .getElementById(
+                        "tradeTargetNick"
+                    )
+                    .value = "";
+
+
+                document
+                    .getElementById(
+                        "tradeTheirItems"
+                    )
+                    .value = "";
+
+
+                document
+                    .querySelectorAll(
+                        "[data-trade-checkbox]"
+                    )
+                    .forEach(
+                        x => x.checked = false
+                    );
+
+
+                await loadTrades();
+
+            } catch (error) {
+
+                showToast(
+                    error.message,
+                    true
+                );
+            }
         }
-    });
+    );
 
 
 /* =========================
@@ -2205,7 +2637,9 @@ async function loadAdmin() {
 async function loadAdminUsers() {
 
     const container =
-        document.getElementById("adminUsersList");
+        document.getElementById(
+            "adminUsersList"
+        );
 
     const data =
         await api("/api/admin/users");
@@ -2216,22 +2650,29 @@ async function loadAdminUsers() {
     if (!users.length) {
 
         container.innerHTML =
-            `<div class="empty">Пользователей нет.</div>`;
+            `<div class="empty">
+                Пользователей нет.
+            </div>`;
 
         return;
     }
 
     let html = `
         <div class="tableWrapper">
+
         <table>
+
             <thead>
+
                 <tr>
                     <th>ID</th>
                     <th>Ник</th>
                     <th>RC</th>
                     <th>Статус</th>
                 </tr>
+
             </thead>
+
             <tbody>
     `;
 
@@ -2239,19 +2680,40 @@ async function loadAdminUsers() {
 
         html += `
             <tr>
-                <td>${user.id}</td>
-                <td>${escapeHtml(user.minecraft_nick)}</td>
-                <td>${Number(user.redstone_coins).toLocaleString("ru-RU")}</td>
+
                 <td>
-                    ${user.banned ? "Заблокирован" : "Активен"}
+                    ${escapeHtml(user.id)}
                 </td>
+
+                <td>
+                    ${escapeHtml(
+                        user.minecraft_nick
+                    )}
+                </td>
+
+                <td>
+                    ${Number(
+                        user.redstone_coins
+                    ).toLocaleString("ru-RU")}
+                </td>
+
+                <td>
+                    ${
+                        user.banned
+                            ? "Заблокирован"
+                            : "Активен"
+                    }
+                </td>
+
             </tr>
         `;
     });
 
     html += `
             </tbody>
+
         </table>
+
         </div>
     `;
 
@@ -2262,7 +2724,9 @@ async function loadAdminUsers() {
 async function loadAdminItems() {
 
     const container =
-        document.getElementById("adminItemsList");
+        document.getElementById(
+            "adminItemsList"
+        );
 
     const data =
         await api("/api/admin/items");
@@ -2273,15 +2737,20 @@ async function loadAdminItems() {
     if (!items.length) {
 
         container.innerHTML =
-            `<div class="empty">Предметов нет.</div>`;
+            `<div class="empty">
+                Предметов нет.
+            </div>`;
 
         return;
     }
 
     let html = `
         <div class="tableWrapper">
+
         <table>
+
             <thead>
+
                 <tr>
                     <th>ID</th>
                     <th>Название</th>
@@ -2289,7 +2758,9 @@ async function loadAdminItems() {
                     <th>Продажа</th>
                     <th></th>
                 </tr>
+
             </thead>
+
             <tbody>
     `;
 
@@ -2297,20 +2768,26 @@ async function loadAdminItems() {
 
         html += `
             <tr>
-                <td>${item.id}</td>
+
+                <td>
+                    ${escapeHtml(item.id)}
+                </td>
 
                 <td>
                     ${escapeHtml(item.name)}
                 </td>
 
                 <td>
-                    ${Number(item.price).toLocaleString("ru-RU")} RC
+                    ${Number(
+                        item.price
+                    ).toLocaleString("ru-RU")} RC
                 </td>
 
                 <td>
-                    ${item.on_sale
-                        ? "В продаже"
-                        : "Снято"
+                    ${
+                        item.on_sale
+                            ? "В продаже"
+                            : "Снято"
                     }
                 </td>
 
@@ -2318,23 +2795,31 @@ async function loadAdminItems() {
 
                     <button
                         class="secondary"
-                        data-sale-id="${item.id}"
-                        data-sale-value="${item.on_sale ? "1" : "0"}"
+                        data-sale-id="${escapeAttr(item.id)}"
+                        data-sale-value="${
+                            item.on_sale
+                                ? "1"
+                                : "0"
+                        }"
                     >
-                        ${item.on_sale
-                            ? "Снять с продажи"
-                            : "Вернуть в продажу"
+                        ${
+                            item.on_sale
+                                ? "Снять с продажи"
+                                : "Вернуть в продажу"
                         }
                     </button>
 
                 </td>
+
             </tr>
         `;
     });
 
     html += `
             </tbody>
+
         </table>
+
         </div>
     `;
 
@@ -2342,45 +2827,56 @@ async function loadAdminItems() {
 
 
     container
-        .querySelectorAll("[data-sale-id]")
+        .querySelectorAll(
+            "[data-sale-id]"
+        )
         .forEach(button => {
 
-            button.addEventListener("click", async () => {
+            button.addEventListener(
+                "click",
+                async () => {
 
-                const id =
-                    Number(button.dataset.saleId);
+                    const id =
+                        button.dataset.saleId;
 
-                const current =
-                    button.dataset.saleValue === "1";
+                    const current =
+                        button.dataset.saleValue ===
+                        "1";
 
-                try {
+                    try {
 
-                    await api("/api/admin/items/sale", {
-                        method: "POST",
-                        body: JSON.stringify({
-                            id,
-                            onSale: !current
-                        })
-                    });
+                        await api(
+                            "/api/admin/items/sale",
+                            {
+                                method: "POST",
 
-                    showToast(
-                        !current
-                            ? "Предмет возвращён в продажу"
-                            : "Предмет снят с продажи",
-                        false
-                    );
+                                body:
+                                    JSON.stringify({
+                                        id,
+                                        onSale: !current
+                                    })
+                            }
+                        );
 
-                    await loadAdminItems();
-                    await loadShop();
+                        showToast(
+                            !current
+                                ? "Предмет возвращён в продажу"
+                                : "Предмет снят с продажи",
+                            false
+                        );
 
-                } catch (error) {
+                        await loadAdminItems();
+                        await loadShop();
 
-                    showToast(
-                        error.message,
-                        true
-                    );
+                    } catch (error) {
+
+                        showToast(
+                            error.message,
+                            true
+                        );
+                    }
                 }
-            });
+            );
         });
 }
 
@@ -2388,10 +2884,14 @@ async function loadAdminItems() {
 async function loadAdminWithdrawals() {
 
     const container =
-        document.getElementById("adminWithdrawalsList");
+        document.getElementById(
+            "adminWithdrawalsList"
+        );
 
     const data =
-        await api("/api/admin/withdrawals");
+        await api(
+            "/api/admin/withdrawals"
+        );
 
     const withdrawals =
         data.withdrawals || [];
@@ -2423,21 +2923,29 @@ async function loadAdminWithdrawals() {
 
             <div class="itemMeta">
                 Игрок:
-                ${escapeHtml(item.minecraft_nick)}
+                ${escapeHtml(
+                    item.minecraft_nick
+                )}
             </div>
 
-            <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <div
+                style="
+                    display:flex;
+                    gap:8px;
+                    flex-wrap:wrap;
+                "
+            >
 
                 <button
                     class="success"
-                    data-approve-withdraw="${item.id}"
+                    data-approve-withdraw="${escapeAttr(item.id)}"
                 >
                     Одобрить + код
                 </button>
 
                 <button
                     class="danger"
-                    data-reject-withdraw="${item.id}"
+                    data-reject-withdraw="${escapeAttr(item.id)}"
                 >
                     Отклонить
                 </button>
@@ -2450,61 +2958,75 @@ async function loadAdminWithdrawals() {
 
 
     container
-        .querySelectorAll("[data-approve-withdraw]")
+        .querySelectorAll(
+            "[data-approve-withdraw]"
+        )
         .forEach(button => {
 
-            button.addEventListener("click", () => {
+            button.addEventListener(
+                "click",
+                () => {
 
-                openCodeModal(
-                    Number(button.dataset.approveWithdraw)
-                );
-            });
+                    openCodeModal(
+                        button.dataset
+                            .approveWithdraw
+                    );
+                }
+            );
         });
 
 
     container
-        .querySelectorAll("[data-reject-withdraw]")
+        .querySelectorAll(
+            "[data-reject-withdraw]"
+        )
         .forEach(button => {
 
-            button.addEventListener("click", () => {
+            button.addEventListener(
+                "click",
+                () => {
 
-                const id =
-                    Number(button.dataset.rejectWithdraw);
+                    const id =
+                        button.dataset
+                            .rejectWithdraw;
 
-                confirmModal(
-                    "Отклонить вывод",
-                    "Предмет будет возвращён игроку.",
-                    async () => {
+                    confirmModal(
+                        "Отклонить вывод",
+                        "Предмет будет возвращён игроку.",
+                        async () => {
 
-                        try {
+                            try {
 
-                            await api(
-                                "/api/admin/withdrawals/reject",
-                                {
-                                    method: "POST",
-                                    body: JSON.stringify({
-                                        withdrawalId: id
-                                    })
-                                }
-                            );
+                                await api(
+                                    "/api/admin/withdrawals/reject",
+                                    {
+                                        method: "POST",
 
-                            showToast(
-                                "Запрос отклонён",
-                                false
-                            );
+                                        body:
+                                            JSON.stringify({
+                                                withdrawalId: id
+                                            })
+                                    }
+                                );
 
-                            await loadAdminWithdrawals();
+                                showToast(
+                                    "Запрос отклонён",
+                                    false
+                                );
 
-                        } catch (error) {
+                                await loadAdminWithdrawals();
 
-                            showToast(
-                                error.message,
-                                true
-                            );
+                            } catch (error) {
+
+                                showToast(
+                                    error.message,
+                                    true
+                                );
+                            }
                         }
-                    }
-                );
-            });
+                    );
+                }
+            );
         });
 }
 
@@ -2515,64 +3037,87 @@ async function loadAdminWithdrawals() {
 
 document
     .getElementById("giveCoinsButton")
-    .addEventListener("click", async () => {
+    .addEventListener(
+        "click",
+        async () => {
 
-        try {
+            try {
 
-            await api(
-                "/api/admin/give-coins",
-                {
-                    method: "POST",
-                    body: JSON.stringify({
-                        minecraftNick:
-                            document
-                                .getElementById("giveCoinsNick")
-                                .value
-                                .trim(),
+                await api(
+                    "/api/admin/give-coins",
+                    {
+                        method: "POST",
 
-                        amount:
-                            Number(
-                                document
-                                    .getElementById("giveCoinsAmount")
-                                    .value
-                            ),
+                        body:
+                            JSON.stringify({
 
-                        reason:
-                            document
-                                .getElementById("giveCoinsReason")
-                                .value
-                                .trim()
-                    })
-                }
-            );
+                                minecraftNick:
+                                    document
+                                        .getElementById(
+                                            "giveCoinsNick"
+                                        )
+                                        .value
+                                        .trim(),
 
-            showToast(
-                "RedstoneCoin выдан",
-                false
-            );
+                                amount:
+                                    Number(
+                                        document
+                                            .getElementById(
+                                                "giveCoinsAmount"
+                                            )
+                                            .value
+                                    ),
 
-            document
-                .getElementById("giveCoinsNick")
-                .value = "";
+                                reason:
+                                    document
+                                        .getElementById(
+                                            "giveCoinsReason"
+                                        )
+                                        .value
+                                        .trim()
 
-            document
-                .getElementById("giveCoinsAmount")
-                .value = "";
+                            })
+                    }
+                );
 
-            document
-                .getElementById("giveCoinsReason")
-                .value = "";
+                showToast(
+                    "RedstoneCoin выдан",
+                    false
+                );
 
-            await loadAdminUsers();
 
-        } catch (error) {
+                document
+                    .getElementById(
+                        "giveCoinsNick"
+                    )
+                    .value = "";
 
-            showToast(
-                error.message,
-                true
-            );
+
+                document
+                    .getElementById(
+                        "giveCoinsAmount"
+                    )
+                    .value = "";
+
+
+                document
+                    .getElementById(
+                        "giveCoinsReason"
+                    )
+                    .value = "";
+
+
+                await loadAdminUsers();
+
+            } catch (error) {
+
+                showToast(
+                    error.message,
+                    true
+                );
+            }
         }
-    });
+    );
 
 
 /* =========================
@@ -2582,10 +3127,14 @@ document
 async function fillGiveItemSelect() {
 
     const select =
-        document.getElementById("giveItemSelect");
+        document.getElementById(
+            "giveItemSelect"
+        );
 
     const data =
-        await api("/api/admin/items");
+        await api(
+            "/api/admin/items"
+        );
 
     const items =
         data.items || [];
@@ -2595,9 +3144,12 @@ async function fillGiveItemSelect() {
     items.forEach(item => {
 
         const option =
-            document.createElement("option");
+            document.createElement(
+                "option"
+            );
 
-        option.value = item.id;
+        option.value =
+            item.id;
 
         option.textContent =
             `${item.name} (#${item.id})`;
@@ -2609,58 +3161,75 @@ async function fillGiveItemSelect() {
 
 document
     .getElementById("giveItemButton")
-    .addEventListener("click", async () => {
+    .addEventListener(
+        "click",
+        async () => {
 
-        try {
+            try {
 
-            await api(
-                "/api/admin/give-item",
-                {
-                    method: "POST",
-                    body: JSON.stringify({
-                        minecraftNick:
-                            document
-                                .getElementById("giveItemNick")
-                                .value
-                                .trim(),
+                await api(
+                    "/api/admin/give-item",
+                    {
+                        method: "POST",
 
-                        itemId:
-                            Number(
-                                document
-                                    .getElementById("giveItemSelect")
-                                    .value
-                            ),
+                        body:
+                            JSON.stringify({
 
-                        reason:
-                            document
-                                .getElementById("giveItemReason")
-                                .value
-                                .trim()
-                    })
-                }
-            );
+                                minecraftNick:
+                                    document
+                                        .getElementById(
+                                            "giveItemNick"
+                                        )
+                                        .value
+                                        .trim(),
 
-            showToast(
-                "Предмет выдан",
-                false
-            );
+                                itemId:
+                                    document
+                                        .getElementById(
+                                            "giveItemSelect"
+                                        )
+                                        .value,
 
-            document
-                .getElementById("giveItemNick")
-                .value = "";
+                                reason:
+                                    document
+                                        .getElementById(
+                                            "giveItemReason"
+                                        )
+                                        .value
+                                        .trim()
 
-            document
-                .getElementById("giveItemReason")
-                .value = "";
+                            })
+                    }
+                );
 
-        } catch (error) {
+                showToast(
+                    "Предмет выдан",
+                    false
+                );
 
-            showToast(
-                error.message,
-                true
-            );
+
+                document
+                    .getElementById(
+                        "giveItemNick"
+                    )
+                    .value = "";
+
+
+                document
+                    .getElementById(
+                        "giveItemReason"
+                    )
+                    .value = "";
+
+            } catch (error) {
+
+                showToast(
+                    error.message,
+                    true
+                );
+            }
         }
-    });
+    );
 
 
 /* =========================
@@ -2669,70 +3238,90 @@ document
 
 document
     .getElementById("banButton")
-    .addEventListener("click", async () => {
+    .addEventListener(
+        "click",
+        async () => {
 
-        try {
+            try {
 
-            await api("/api/admin/ban", {
-                method: "POST",
-                body: JSON.stringify({
-                    minecraftNick:
-                        document
-                            .getElementById("adminUserNick")
-                            .value
-                            .trim()
-                })
-            });
+                await api(
+                    "/api/admin/ban",
+                    {
+                        method: "POST",
 
-            showToast(
-                "Игрок заблокирован",
-                false
-            );
+                        body:
+                            JSON.stringify({
+                                minecraftNick:
+                                    document
+                                        .getElementById(
+                                            "adminUserNick"
+                                        )
+                                        .value
+                                        .trim()
+                            })
+                    }
+                );
 
-            await loadAdminUsers();
+                showToast(
+                    "Игрок заблокирован",
+                    false
+                );
 
-        } catch (error) {
+                await loadAdminUsers();
 
-            showToast(
-                error.message,
-                true
-            );
+            } catch (error) {
+
+                showToast(
+                    error.message,
+                    true
+                );
+            }
         }
-    });
+    );
 
 
 document
     .getElementById("unbanButton")
-    .addEventListener("click", async () => {
+    .addEventListener(
+        "click",
+        async () => {
 
-        try {
+            try {
 
-            await api("/api/admin/unban", {
-                method: "POST",
-                body: JSON.stringify({
-                    minecraftNick:
-                        document
-                            .getElementById("adminUserNick")
-                            .value
-                            .trim()
-                })
-            });
+                await api(
+                    "/api/admin/unban",
+                    {
+                        method: "POST",
 
-            showToast(
-                "Игрок разблокирован",
-                false
-            );
+                        body:
+                            JSON.stringify({
+                                minecraftNick:
+                                    document
+                                        .getElementById(
+                                            "adminUserNick"
+                                        )
+                                        .value
+                                        .trim()
+                            })
+                    }
+                );
 
-            await loadAdminUsers();
+                showToast(
+                    "Игрок разблокирован",
+                    false
+                );
 
-        } catch (error) {
+                await loadAdminUsers();
 
-            showToast(
-                error.message,
-                true
-            );
+            } catch (error) {
+
+                showToast(
+                    error.message,
+                    true
+                );
+            }
         }
-    });
+    );
 
 
 /* =========================
@@ -2741,65 +3330,75 @@ document
 
 document
     .getElementById("addItemButton")
-    .addEventListener("click", async () => {
+    .addEventListener(
+        "click",
+        async () => {
 
-        try {
+            try {
 
-            await api("/api/admin/items/add", {
-                method: "POST",
-                body: JSON.stringify({
+                await api(
+                    "/api/admin/items/add",
+                    {
+                        method: "POST",
 
-                    id:
-                        Number(
-                            document
-                                .getElementById("addItemId")
-                                .value
-                        ),
+                        body:
+                            JSON.stringify({
 
-                    name:
-                        document
-                            .getElementById("addItemName")
-                            .value
-                            .trim(),
+                                id:
+                                    document
+                                        .getElementById(
+                                            "addItemId"
+                                        )
+                                        .value
+                                        .trim(),
 
-                    icon:
-                        document
-                            .getElementById("addItemIcon")
-                            .value
-                            .trim(),
+                                name:
+                                    document
+                                        .getElementById(
+                                            "addItemName"
+                                        )
+                                        .value
+                                        .trim(),
 
-                    minecraftId:
-                        document
-                            .getElementById("addItemMinecraftId")
-                            .value
-                            .trim(),
+                                icon:
+                                    document
+                                        .getElementById(
+                                            "addItemIcon"
+                                        )
+                                        .value
+                                        .trim(),
 
-                    price:
-                        Number(
-                            document
-                                .getElementById("addItemPrice")
-                                .value
-                        )
-                })
-            });
+                                price:
+                                    Number(
+                                        document
+                                            .getElementById(
+                                                "addItemPrice"
+                                            )
+                                            .value
+                                    )
 
-            showToast(
-                "Предмет добавлен",
-                false
-            );
+                            })
+                    }
+                );
 
-            await loadAdminItems();
-            await loadShop();
-            await fillGiveItemSelect();
+                showToast(
+                    "Предмет добавлен",
+                    false
+                );
 
-        } catch (error) {
+                await loadAdminItems();
+                await loadShop();
+                await fillGiveItemSelect();
 
-            showToast(
-                error.message,
-                true
-            );
+            } catch (error) {
+
+                showToast(
+                    error.message,
+                    true
+                );
+            }
         }
-    });
+    );
 
 
 /* =========================
@@ -2808,72 +3407,86 @@ document
 
 document
     .getElementById("editItemButton")
-    .addEventListener("click", async () => {
+    .addEventListener(
+        "click",
+        async () => {
 
-        try {
+            try {
 
-            await api("/api/admin/items/edit", {
-                method: "POST",
-                body: JSON.stringify({
+                await api(
+                    "/api/admin/items/edit",
+                    {
+                        method: "POST",
 
-                    id:
-                        Number(
-                            document
-                                .getElementById("editItemId")
-                                .value
-                        ),
+                        body:
+                            JSON.stringify({
 
-                    name:
-                        document
-                            .getElementById("editItemName")
-                            .value
-                            .trim(),
+                                id:
+                                    document
+                                        .getElementById(
+                                            "editItemId"
+                                        )
+                                        .value
+                                        .trim(),
 
-                    icon:
-                        document
-                            .getElementById("editItemIcon")
-                            .value
-                            .trim(),
+                                name:
+                                    document
+                                        .getElementById(
+                                            "editItemName"
+                                        )
+                                        .value
+                                        .trim(),
 
-                    minecraftId:
-                        document
-                            .getElementById("editItemMinecraftId")
-                            .value
-                            .trim(),
+                                icon:
+                                    document
+                                        .getElementById(
+                                            "editItemIcon"
+                                        )
+                                        .value
+                                        .trim(),
 
-                    price:
-                        Number(
-                            document
-                                .getElementById("editItemPrice")
-                                .value
-                        )
-                })
-            });
+                                price:
+                                    Number(
+                                        document
+                                            .getElementById(
+                                                "editItemPrice"
+                                            )
+                                            .value
+                                    )
 
-            showToast(
-                "Предмет изменён",
-                false
-            );
+                            })
+                    }
+                );
 
-            await loadAdminItems();
-            await loadShop();
-            await fillGiveItemSelect();
+                showToast(
+                    "Предмет изменён",
+                    false
+                );
 
-        } catch (error) {
+                await loadAdminItems();
+                await loadShop();
+                await fillGiveItemSelect();
 
-            showToast(
-                error.message,
-                true
-            );
+            } catch (error) {
+
+                showToast(
+                    error.message,
+                    true
+                );
+            }
         }
-    });
+    );
 
 
 /* =========================
    MODAL
 ========================= */
 
-function confirmModal(title, content, action) {
+function confirmModal(
+    title,
+    content,
+    action
+) {
 
     document
         .getElementById("modalTitle")
@@ -2893,21 +3506,28 @@ function confirmModal(title, content, action) {
 
 document
     .getElementById("modalCancel")
-    .addEventListener("click", closeModal);
+    .addEventListener(
+        "click",
+        closeModal
+    );
 
 
 document
     .getElementById("modalConfirm")
-    .addEventListener("click", async () => {
+    .addEventListener(
+        "click",
+        async () => {
 
-        const action = modalAction;
+            const action =
+                modalAction;
 
-        closeModal();
+            closeModal();
 
-        if (action) {
-            await action();
+            if (action) {
+                await action();
+            }
         }
-    });
+    );
 
 
 function closeModal() {
@@ -2924,79 +3544,101 @@ function closeModal() {
    WITHDRAW CODE MODAL
 ========================= */
 
-function openCodeModal(withdrawalId) {
+function openCodeModal(
+    withdrawalId
+) {
 
     document
         .getElementById("modalTitle")
-        .textContent = "Одобрить вывод";
+        .textContent =
+            "Одобрить вывод";
 
     const content =
-        document.getElementById("modalContent");
+        document.getElementById(
+            "modalContent"
+        );
 
     content.innerHTML = "";
 
+
     const label =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
 
     label.textContent =
         "Вставьте код активации, который создали для Minecraft:";
 
-    label.style.marginBottom = "10px";
+    label.style.marginBottom =
+        "10px";
+
 
     const input =
-        document.createElement("input");
+        document.createElement(
+            "input"
+        );
 
     input.placeholder =
         "Например: ABC-742-X9";
 
+
     content.appendChild(label);
     content.appendChild(input);
 
+
     document
-        .getElementById("modalOverlay")
+        .getElementById(
+            "modalOverlay"
+        )
         .classList.remove("hidden");
 
-    modalAction = async () => {
 
-        const code =
-            input.value.trim();
+    modalAction =
+        async () => {
 
-        if (!code) {
-            showToast(
-                "Введите код",
-                true
-            );
-            return;
-        }
+            const code =
+                input.value.trim();
 
-        try {
+            if (!code) {
 
-            await api(
-                "/api/admin/withdrawals/approve",
-                {
-                    method: "POST",
-                    body: JSON.stringify({
-                        withdrawalId,
-                        code
-                    })
-                }
-            );
+                showToast(
+                    "Введите код",
+                    true
+                );
 
-            showToast(
-                "Вывод одобрен",
-                false
-            );
+                return;
+            }
 
-            await loadAdminWithdrawals();
+            try {
 
-        } catch (error) {
+                await api(
+                    "/api/admin/withdrawals/approve",
+                    {
+                        method: "POST",
 
-            showToast(
-                error.message,
-                true
-            );
-        }
-    };
+                        body:
+                            JSON.stringify({
+                                withdrawalId,
+                                code
+                            })
+                    }
+                );
+
+                showToast(
+                    "Вывод одобрен",
+                    false
+                );
+
+                await loadAdminWithdrawals();
+
+            } catch (error) {
+
+                showToast(
+                    error.message,
+                    true
+                );
+            }
+        };
 }
 
 
@@ -3004,23 +3646,35 @@ function openCodeModal(withdrawalId) {
    TOAST
 ========================= */
 
-function showToast(message, error = false) {
+function showToast(
+    message,
+    error = false
+) {
 
     const container =
-        document.getElementById("toastContainer");
+        document.getElementById(
+            "toastContainer"
+        );
 
     const toast =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
 
     toast.className =
         "toast " +
-        (error
-            ? "error"
-            : "successToast");
+        (
+            error
+                ? "error"
+                : "successToast"
+        );
 
-    toast.textContent = message;
+    toast.textContent =
+        message;
 
-    container.appendChild(toast);
+    container.appendChild(
+        toast
+    );
 
     setTimeout(() => {
 
@@ -3037,11 +3691,26 @@ function showToast(message, error = false) {
 function escapeHtml(value) {
 
     return String(value ?? "")
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
+        .replaceAll(
+            "&",
+            "&amp;"
+        )
+        .replaceAll(
+            "<",
+            "&lt;"
+        )
+        .replaceAll(
+            ">",
+            "&gt;"
+        )
+        .replaceAll(
+            '"',
+            "&quot;"
+        )
+        .replaceAll(
+            "'",
+            "&#039;"
+        );
 }
 
 
@@ -3060,11 +3729,17 @@ function formatDate(value) {
     const date =
         new Date(value);
 
-    if (Number.isNaN(date.getTime())) {
+    if (
+        Number.isNaN(
+            date.getTime()
+        )
+    ) {
         return String(value);
     }
 
-    return date.toLocaleString("ru-RU");
+    return date.toLocaleString(
+        "ru-RU"
+    );
 }
 </script>
 
