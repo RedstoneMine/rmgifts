@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>RedstoneGifts</title>
 
     <link rel="stylesheet" href="style.css">
@@ -12,18 +11,16 @@
 <body>
 
     <!-- =========================================
-         БЛОКИРУЮЩЕЕ ОКНО УСЛОВИЙ ПОЛЬЗОВАНИЯ
+         УСЛОВИЯ ПОЛЬЗОВАНИЯ
     ========================================== -->
 
     <div id="terms-overlay">
 
         <div id="terms-modal">
 
-            <div class="terms-header">
-                <h2>Условия пользования</h2>
-            </div>
+            <h2>Условия пользования</h2>
 
-            <div class="terms-content">
+            <div id="terms-content">
 
                 <p>
                     Перед использованием RedstoneGifts необходимо
@@ -37,9 +34,10 @@
 
                 <p>
                     RedstoneGifts предоставляется в текущем виде.
-                    Администрация не несёт ответственности за возможную
-                    потерю виртуальных предметов, RedstoneCoin, данных
-                    аккаунта или иные последствия использования сервиса.
+                    Администрация сервиса не несёт ответственности
+                    за возможную потерю виртуальных предметов,
+                    RedstoneCoin, данных аккаунта или иные последствия
+                    использования сервиса.
                 </p>
 
                 <p>
@@ -54,11 +52,12 @@
 
             </div>
 
-            <div class="terms-footer">
-                <button id="accept-terms" type="button">
-                    ОК
-                </button>
-            </div>
+            <button
+                id="accept-terms"
+                type="button"
+            >
+                ОК
+            </button>
 
         </div>
 
@@ -71,21 +70,25 @@
 
     <div id="site">
 
-        <!-- =====================================
-             HEADER
-        ====================================== -->
+        <!-- HEADER -->
 
         <header id="main-header">
 
-            <div class="header-left">
-
-                <a href="#" class="logo">
+            <div class="logo">
+                <a href="#" data-page="home">
                     RedstoneGifts
                 </a>
-
             </div>
 
-            <nav class="main-navigation">
+            <nav id="main-navigation">
+
+                <button
+                    type="button"
+                    class="nav-button"
+                    data-page="home"
+                >
+                    Главная
+                </button>
 
                 <button
                     type="button"
@@ -127,18 +130,23 @@
                     Трейды
                 </button>
 
+                <button
+                    type="button"
+                    class="nav-button"
+                    data-page="admin"
+                    id="admin-nav-button"
+                    hidden
+                >
+                    Админ-панель
+                </button>
+
             </nav>
 
-            <div class="header-right">
+            <div id="account-area">
 
                 <div id="balance-display">
-                    <span class="balance-label">
-                        RedstoneCoin:
-                    </span>
-
-                    <span id="redstone-coins">
-                        0
-                    </span>
+                    <span>RedstoneCoin:</span>
+                    <span id="redstone-coins">0</span>
                 </div>
 
                 <button
@@ -168,16 +176,13 @@
         </header>
 
 
-        <!-- =====================================
-             ОСНОВНОЙ КОНТЕНТ
-        ====================================== -->
+        <!-- MAIN -->
 
         <main id="main-content">
 
-
-            <!-- =================================
+            <!-- ================================
                  ГЛАВНАЯ
-            ================================== -->
+            ================================= -->
 
             <section
                 id="page-home"
@@ -185,40 +190,36 @@
                 data-page-section="home"
             >
 
-                <div class="page-container">
+                <h1>RedstoneGifts</h1>
 
-                    <h1>RedstoneGifts</h1>
+                <p>
+                    Добро пожаловать в RedstoneGifts.
+                </p>
 
-                    <p>
-                        Добро пожаловать в RedstoneGifts.
-                    </p>
+                <div id="home-account-actions">
 
-                    <div class="home-actions">
+                    <button
+                        type="button"
+                        id="home-login-button"
+                    >
+                        Войти
+                    </button>
 
-                        <button
-                            type="button"
-                            id="home-login-button"
-                        >
-                            Войти
-                        </button>
-
-                        <button
-                            type="button"
-                            id="home-register-button"
-                        >
-                            Регистрация
-                        </button>
-
-                    </div>
+                    <button
+                        type="button"
+                        id="home-register-button"
+                    >
+                        Регистрация
+                    </button>
 
                 </div>
 
             </section>
 
 
-            <!-- =================================
+            <!-- ================================
                  МАГАЗИН
-            ================================== -->
+            ================================= -->
 
             <section
                 id="page-shop"
@@ -227,32 +228,28 @@
                 hidden
             >
 
-                <div class="page-container">
+                <h1>Магазин</h1>
 
-                    <div class="page-title">
+                <div
+                    id="shop-items"
+                    class="items-grid"
+                >
+                </div>
 
-                        <h1>Магазин</h1>
-
-                    </div>
-
-                    <div
-                        id="shop-items"
-                        class="items-grid"
-                    >
-                        <!--
-                            Товары будут добавляться сюда
-                            через JavaScript из Worker.
-                        -->
-                    </div>
-
+                <div
+                    id="shop-empty"
+                    class="empty-state"
+                    hidden
+                >
+                    В магазине пока нет предметов.
                 </div>
 
             </section>
 
 
-            <!-- =================================
+            <!-- ================================
                  ИНВЕНТАРЬ
-            ================================== -->
+            ================================= -->
 
             <section
                 id="page-inventory"
@@ -261,41 +258,28 @@
                 hidden
             >
 
-                <div class="page-container">
+                <h1>Инвентарь</h1>
 
-                    <div class="page-title">
+                <div
+                    id="inventory-items"
+                    class="items-grid"
+                >
+                </div>
 
-                        <h1>Инвентарь</h1>
-
-                    </div>
-
-                    <div
-                        id="inventory-items"
-                        class="items-grid"
-                    >
-                        <!--
-                            Предметы пользователя.
-                        -->
-                    </div>
-
-                    <div
-                        id="inventory-empty"
-                        class="empty-state"
-                        hidden
-                    >
-                        <p>
-                            Ваш инвентарь пуст.
-                        </p>
-                    </div>
-
+                <div
+                    id="inventory-empty"
+                    class="empty-state"
+                    hidden
+                >
+                    Ваш инвентарь пуст.
                 </div>
 
             </section>
 
 
-            <!-- =================================
+            <!-- ================================
                  СООБЩЕНИЯ
-            ================================== -->
+            ================================= -->
 
             <section
                 id="page-messages"
@@ -304,41 +288,28 @@
                 hidden
             >
 
-                <div class="page-container">
+                <h1>Сообщения</h1>
 
-                    <div class="page-title">
+                <div
+                    id="messages-list"
+                    class="messages-list"
+                >
+                </div>
 
-                        <h1>Сообщения</h1>
-
-                    </div>
-
-                    <div
-                        id="messages-list"
-                        class="messages-list"
-                    >
-                        <!--
-                            Сообщения пользователя.
-                        -->
-                    </div>
-
-                    <div
-                        id="messages-empty"
-                        class="empty-state"
-                        hidden
-                    >
-                        <p>
-                            У вас нет сообщений.
-                        </p>
-                    </div>
-
+                <div
+                    id="messages-empty"
+                    class="empty-state"
+                    hidden
+                >
+                    У вас нет сообщений.
                 </div>
 
             </section>
 
 
-            <!-- =================================
+            <!-- ================================
                  ЗАПРОСЫ НА ВЫВОД
-            ================================== -->
+            ================================= -->
 
             <section
                 id="page-withdrawals"
@@ -347,41 +318,28 @@
                 hidden
             >
 
-                <div class="page-container">
+                <h1>Мои запросы на вывод</h1>
 
-                    <div class="page-title">
+                <div
+                    id="withdrawals-list"
+                    class="withdrawals-list"
+                >
+                </div>
 
-                        <h1>Мои запросы на вывод</h1>
-
-                    </div>
-
-                    <div
-                        id="withdrawals-list"
-                        class="withdrawals-list"
-                    >
-                        <!--
-                            Активные запросы на вывод.
-                        -->
-                    </div>
-
-                    <div
-                        id="withdrawals-empty"
-                        class="empty-state"
-                        hidden
-                    >
-                        <p>
-                            У вас нет запросов на вывод.
-                        </p>
-                    </div>
-
+                <div
+                    id="withdrawals-empty"
+                    class="empty-state"
+                    hidden
+                >
+                    У вас нет запросов на вывод.
                 </div>
 
             </section>
 
 
-            <!-- =================================
+            <!-- ================================
                  ТРЕЙДЫ
-            ================================== -->
+            ================================= -->
 
             <section
                 id="page-trades"
@@ -390,113 +348,88 @@
                 hidden
             >
 
-                <div class="page-container">
+                <h1>Трейды</h1>
 
-                    <div class="page-title">
+                <!-- Создание трейда -->
 
-                        <h1>Трейды</h1>
+                <div id="trade-create">
 
-                    </div>
+                    <h2>
+                        Создать трейд
+                    </h2>
 
+                    <label for="trade-target">
+                        Ник игрока
+                    </label>
 
-                    <!-- Создание трейда -->
-
-                    <div
-                        id="trade-create"
-                        class="trade-panel"
+                    <input
+                        type="text"
+                        id="trade-target"
+                        maxlength="16"
+                        autocomplete="off"
                     >
 
-                        <h2>
-                            Создать трейд
-                        </h2>
+                    <div class="trade-columns">
 
-                        <div class="form-group">
+                        <div class="trade-column">
 
-                            <label for="trade-target">
-                                Ник игрока
-                            </label>
+                            <h3>
+                                Мои предметы
+                            </h3>
 
-                            <input
-                                type="text"
-                                id="trade-target"
-                                name="trade-target"
-                                maxlength="16"
-                                autocomplete="off"
+                            <div
+                                id="trade-my-items"
+                                class="trade-items"
                             >
-
-                        </div>
-
-
-                        <div class="trade-columns">
-
-                            <div class="trade-column">
-
-                                <h3>
-                                    Мои предметы
-                                </h3>
-
-                                <div
-                                    id="trade-my-items"
-                                    class="trade-items"
-                                >
-                                    <!--
-                                        Предметы текущего пользователя.
-                                    -->
-                                </div>
-
-                            </div>
-
-
-                            <div class="trade-column">
-
-                                <h3>
-                                    Предметы другого игрока
-                                </h3>
-
-                                <div
-                                    id="trade-other-items"
-                                    class="trade-items"
-                                >
-                                    <!--
-                                        Предметы выбранного игрока.
-                                    -->
-                                </div>
-
                             </div>
 
                         </div>
 
+                        <div class="trade-column">
 
-                        <button
-                            type="button"
-                            id="create-trade-button"
-                        >
-                            Кинуть запрос на трейд
-                        </button>
+                            <h3>
+                                Предметы другого игрока
+                            </h3>
+
+                            <div
+                                id="trade-other-items"
+                                class="trade-items"
+                            >
+                            </div>
+
+                        </div>
 
                     </div>
 
+                    <button
+                        type="button"
+                        id="load-trade-player"
+                    >
+                        Загрузить игрока
+                    </button>
 
-                    <!-- Входящие трейды -->
+                    <button
+                        type="button"
+                        id="create-trade-button"
+                    >
+                        Кинуть запрос на трейд
+                    </button>
+
+                </div>
+
+
+                <!-- Входящие трейды -->
+
+                <div id="incoming-trades">
+
+                    <h2>
+                        Входящие запросы
+                    </h2>
 
                     <div
-                        id="incoming-trades"
-                        class="trade-panel"
+                        id="incoming-trades-list"
+                        class="trades-list"
                     >
-
-                        <h2>
-                            Входящие запросы
-                        </h2>
-
-                        <div
-                            id="incoming-trades-list"
-                            class="trades-list"
-                        >
-                            <!--
-                                Входящие запросы на трейд.
-                            -->
-                        </div>
-
                     </div>
 
                 </div>
@@ -504,9 +437,9 @@
             </section>
 
 
-            <!-- =================================
+            <!-- ================================
                  АДМИН-ПАНЕЛЬ
-            ================================== -->
+            ================================= -->
 
             <section
                 id="page-admin"
@@ -515,260 +448,212 @@
                 hidden
             >
 
-                <div class="page-container">
-
-                    <div class="page-title">
-
-                        <h1>
-                            Админ-панель
-                        </h1>
-
-                    </div>
+                <h1>
+                    Админ-панель
+                </h1>
 
 
-                    <!-- Пользователи -->
+                <!-- Пользователи -->
 
-                    <div
-                        id="admin-users"
-                        class="admin-section"
+                <div class="admin-section">
+
+                    <h2>
+                        Пользователи
+                    </h2>
+
+                    <label for="admin-user-nick">
+                        Minecraft ник
+                    </label>
+
+                    <input
+                        type="text"
+                        id="admin-user-nick"
+                        maxlength="16"
                     >
 
-                        <h2>
-                            Пользователи
-                        </h2>
+                    <button
+                        type="button"
+                        id="admin-ban-button"
+                    >
+                        Бан
+                    </button>
 
-                        <div class="admin-form">
+                    <button
+                        type="button"
+                        id="admin-unban-button"
+                    >
+                        Разбан
+                    </button>
 
-                            <label for="admin-user-nick">
-                                Minecraft ник
-                            </label>
-
-                            <input
-                                type="text"
-                                id="admin-user-nick"
-                                maxlength="16"
-                                autocomplete="off"
-                            >
-
-                            <button
-                                type="button"
-                                id="admin-ban-button"
-                            >
-                                Бан
-                            </button>
-
-                            <button
-                                type="button"
-                                id="admin-unban-button"
-                            >
-                                Разбан
-                            </button>
-
-                        </div>
-
-                    </div>
+                </div>
 
 
-                    <!-- Выдача RedstoneCoin -->
+                <!-- Выдать RedstoneCoin -->
 
-                    <div
-                        id="admin-give-coins"
-                        class="admin-section"
+                <div class="admin-section">
+
+                    <h2>
+                        Выдать RedstoneCoin
+                    </h2>
+
+                    <label for="admin-coins-nick">
+                        Minecraft ник
+                    </label>
+
+                    <input
+                        type="text"
+                        id="admin-coins-nick"
+                        maxlength="16"
                     >
 
-                        <h2>
-                            Выдать RedstoneCoin
-                        </h2>
+                    <label for="admin-coins-amount">
+                        Количество
+                    </label>
 
-                        <div class="admin-form">
-
-                            <label for="admin-coins-nick">
-                                Minecraft ник
-                            </label>
-
-                            <input
-                                type="text"
-                                id="admin-coins-nick"
-                                maxlength="16"
-                            >
-
-                            <label for="admin-coins-amount">
-                                Количество
-                            </label>
-
-                            <input
-                                type="number"
-                                id="admin-coins-amount"
-                                min="1"
-                            >
-
-                            <label for="admin-coins-reason">
-                                Причина
-                            </label>
-
-                            <textarea
-                                id="admin-coins-reason"
-                                maxlength="1000"
-                            ></textarea>
-
-                            <button
-                                type="button"
-                                id="admin-give-coins-button"
-                            >
-                                Выдать RedstoneCoin
-                            </button>
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- Выдача предмета -->
-
-                    <div
-                        id="admin-give-item"
-                        class="admin-section"
+                    <input
+                        type="number"
+                        id="admin-coins-amount"
+                        min="1"
                     >
 
-                        <h2>
-                            Выдать предмет
-                        </h2>
+                    <label for="admin-coins-reason">
+                        Причина
+                    </label>
 
-                        <div class="admin-form">
+                    <textarea
+                        id="admin-coins-reason"
+                        maxlength="1000"
+                    ></textarea>
 
-                            <label for="admin-item-nick">
-                                Minecraft ник
-                            </label>
+                    <button
+                        type="button"
+                        id="admin-give-coins-button"
+                    >
+                        Выдать RedstoneCoin
+                    </button>
 
-                            <input
-                                type="text"
-                                id="admin-item-nick"
-                                maxlength="16"
-                            >
-
-                            <label for="admin-item-select">
-                                Предмет
-                            </label>
-
-                            <select id="admin-item-select">
-                                <!--
-                                    Предметы будут загружены через JS.
-                                -->
-                            </select>
-
-                            <label for="admin-item-reason">
-                                Причина
-                            </label>
-
-                            <textarea
-                                id="admin-item-reason"
-                                maxlength="1000"
-                            ></textarea>
-
-                            <button
-                                type="button"
-                                id="admin-give-item-button"
-                            >
-                                Выдать предмет
-                            </button>
-
-                        </div>
-
-                    </div>
+                </div>
 
 
-                    <!-- Запросы на вывод -->
+                <!-- Выдать предмет -->
 
-                    <div
-                        id="admin-withdrawals"
-                        class="admin-section"
+                <div class="admin-section">
+
+                    <h2>
+                        Выдать предмет
+                    </h2>
+
+                    <label for="admin-item-nick">
+                        Minecraft ник
+                    </label>
+
+                    <input
+                        type="text"
+                        id="admin-item-nick"
+                        maxlength="16"
                     >
 
-                        <h2>
-                            Запросы на вывод
-                        </h2>
+                    <label for="admin-item-select">
+                        Предмет
+                    </label>
 
-                        <div
-                            id="admin-withdrawals-list"
-                            class="withdrawals-list"
-                        >
-                            <!--
-                                Запросы пользователей.
-                            -->
-                        </div>
+                    <select id="admin-item-select">
+                    </select>
 
-                    </div>
+                    <label for="admin-item-reason">
+                        Причина
+                    </label>
+
+                    <textarea
+                        id="admin-item-reason"
+                        maxlength="1000"
+                    ></textarea>
+
+                    <button
+                        type="button"
+                        id="admin-give-item-button"
+                    >
+                        Выдать предмет
+                    </button>
+
+                </div>
 
 
-                    <!-- Предметы -->
+                <!-- Запросы на вывод -->
+
+                <div class="admin-section">
+
+                    <h2>
+                        Запросы на вывод
+                    </h2>
 
                     <div
-                        id="admin-items"
-                        class="admin-section"
+                        id="admin-withdrawals-list"
+                        class="withdrawals-list"
                     >
-
-                        <h2>
-                            Предметы
-                        </h2>
-
-                        <div class="admin-item-actions">
-
-                            <button
-                                type="button"
-                                id="admin-add-item-button"
-                            >
-                                Добавить
-                            </button>
-
-                            <button
-                                type="button"
-                                id="admin-edit-item-button"
-                            >
-                                Изменить
-                            </button>
-
-                            <button
-                                type="button"
-                                id="admin-remove-item-button"
-                            >
-                                Снять с продажи
-                            </button>
-
-                        </div>
-
-                        <div
-                            id="admin-items-list"
-                            class="items-list"
-                        >
-                            <!--
-                                Все существующие предметы.
-                            -->
-                        </div>
-
                     </div>
 
+                </div>
 
-                    <!-- Убранные с продажи -->
+
+                <!-- Предметы -->
+
+                <div class="admin-section">
+
+                    <h2>
+                        Предметы
+                    </h2>
+
+                    <button
+                        type="button"
+                        id="admin-add-item-button"
+                    >
+                        Добавить
+                    </button>
+
+                    <button
+                        type="button"
+                        id="admin-edit-item-button"
+                    >
+                        Изменить
+                    </button>
+
+                    <button
+                        type="button"
+                        id="admin-remove-item-button"
+                    >
+                        Снять с продажи
+                    </button>
 
                     <div
-                        id="admin-removed-items"
-                        class="admin-section"
+                        id="admin-items-list"
+                        class="items-list"
                     >
-
-                        <h2>
-                            Убраные с продажи
-                        </h2>
-
-                        <div
-                            id="admin-removed-items-list"
-                            class="items-list"
-                        >
-                            <!--
-                                Предметы onSale = false.
-                            -->
-                        </div>
-
                     </div>
+
+                </div>
+
+
+                <!-- Убранные предметы -->
+
+                <div class="admin-section">
+
+                    <h2>
+                        Убраные с продажи
+                    </h2>
+
+                    <div
+                        id="admin-removed-items-list"
+                        class="items-list"
+                    >
+                    </div>
+
+                    <button
+                        type="button"
+                        id="admin-restore-item-button"
+                    >
+                        Вернуть в продажу
+                    </button>
 
                 </div>
 
@@ -777,19 +662,13 @@
         </main>
 
 
-        <!-- =====================================
-             FOOTER
-        ====================================== -->
+        <!-- FOOTER -->
 
         <footer id="main-footer">
 
-            <div class="footer-content">
-
-                <span>
-                    RedstoneGifts
-                </span>
-
-            </div>
+            <span>
+                RedstoneGifts
+            </span>
 
         </footer>
 
@@ -797,11 +676,8 @@
 
 
     <!-- =========================================
-         МОДАЛЬНЫЕ ОКНА
+         МОДАЛЬНОЕ ОКНО ВХОДА
     ========================================== -->
-
-
-    <!-- Вход -->
 
     <div
         id="login-modal"
@@ -832,7 +708,6 @@
                 <input
                     type="text"
                     id="login-nick"
-                    name="minecraft_nick"
                     maxlength="16"
                     autocomplete="username"
                     required
@@ -845,14 +720,11 @@
                 <input
                     type="password"
                     id="login-password"
-                    name="password"
                     autocomplete="current-password"
                     required
                 >
 
-                <button
-                    type="submit"
-                >
+                <button type="submit">
                     Войти
                 </button>
 
@@ -863,7 +735,9 @@
     </div>
 
 
-    <!-- Регистрация -->
+    <!-- =========================================
+         МОДАЛЬНОЕ ОКНО РЕГИСТРАЦИИ
+    ========================================== -->
 
     <div
         id="register-modal"
@@ -894,7 +768,6 @@
                 <input
                     type="text"
                     id="register-nick"
-                    name="minecraft_nick"
                     maxlength="16"
                     autocomplete="username"
                     required
@@ -907,7 +780,6 @@
                 <input
                     type="password"
                     id="register-password"
-                    name="password"
                     autocomplete="new-password"
                     required
                 >
@@ -919,14 +791,11 @@
                 <input
                     type="password"
                     id="register-password-confirm"
-                    name="password_confirm"
                     autocomplete="new-password"
                     required
                 >
 
-                <button
-                    type="submit"
-                >
+                <button type="submit">
                     Зарегистрироваться
                 </button>
 
@@ -937,7 +806,9 @@
     </div>
 
 
-    <!-- Подтверждение вывода -->
+    <!-- =========================================
+         МОДАЛЬНОЕ ОКНО ВЫВОДА
+    ========================================== -->
 
     <div
         id="withdraw-modal"
@@ -963,31 +834,28 @@
                 Вы действительно хотите вывести этот предмет?
             </p>
 
-            <div class="modal-actions">
+            <button
+                type="button"
+                id="confirm-withdraw-button"
+            >
+                Подтвердить
+            </button>
 
-                <button
-                    type="button"
-                    id="confirm-withdraw-button"
-                >
-                    Подтвердить
-                </button>
-
-                <button
-                    type="button"
-                    class="secondary-button"
-                    data-close-modal="withdraw-modal"
-                >
-                    Отмена
-                </button>
-
-            </div>
+            <button
+                type="button"
+                data-close-modal="withdraw-modal"
+            >
+                Отмена
+            </button>
 
         </div>
 
     </div>
 
 
-    <!-- Сообщение -->
+    <!-- =========================================
+         УНИВЕРСАЛЬНОЕ ОКНО СООБЩЕНИЯ
+    ========================================== -->
 
     <div
         id="message-modal"
@@ -1020,6 +888,39 @@
     <!-- =========================================
          JAVASCRIPT
     ========================================== -->
+
+    <script>
+
+        /*
+         * До принятия условий весь сайт заблокирован.
+         * Никакие элементы сайта, кроме кнопки ОК,
+         * не должны работать.
+         */
+
+        const termsOverlay = document.getElementById("terms-overlay");
+        const acceptTermsButton = document.getElementById("accept-terms");
+
+        const site = document.getElementById("site");
+
+        function lockSite() {
+            document.body.classList.add("terms-active");
+            site.setAttribute("inert", "");
+        }
+
+        function unlockSite() {
+            document.body.classList.remove("terms-active");
+            site.removeAttribute("inert");
+
+            termsOverlay.hidden = true;
+        }
+
+        lockSite();
+
+        acceptTermsButton.addEventListener("click", function () {
+            unlockSite();
+        });
+
+    </script>
 
     <script src="script.js"></script>
 
