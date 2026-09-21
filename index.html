@@ -218,6 +218,10 @@ main {
     padding: 18px;
 }
 
+/*
+ * Все иконки предметов имеют один и тот же размер.
+ * Само изображение не растягивается благодаря contain.
+ */
 .itemIcon {
     width: 80px;
     height: 80px;
@@ -225,8 +229,21 @@ main {
     object-position: center;
     border-radius: 8px;
     display: block;
-    margin-bottom: 14px;
+    margin: 0 auto 14px;
     background: #101016;
+    border: 1px solid #24242e;
+}
+
+.itemIconPreview {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    object-position: center;
+    border-radius: 8px;
+    display: block;
+    background: #101016;
+    border: 1px solid #24242e;
+    margin-top: 10px;
 }
 
 .itemName {
@@ -343,6 +360,13 @@ textarea {
     resize: vertical;
 }
 
+.iconHint {
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.45;
+    margin-top: 7px;
+}
+
 /* =========================
    AUTH
 ========================= */
@@ -438,6 +462,16 @@ td {
 
 tr:last-child td {
     border-bottom: 0;
+}
+
+.tableIcon {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    display: block;
+    border-radius: 7px;
+    background: #101016;
+    border: 1px solid #24242e;
 }
 
 /* =========================
@@ -603,9 +637,7 @@ tr:last-child td {
 
 <body>
 
-<!-- =========================
-     TERMS
-========================= -->
+<!-- TERMS -->
 
 <div id="termsOverlay">
 
@@ -642,9 +674,7 @@ tr:last-child td {
 </div>
 
 
-<!-- =========================
-     AUTH
-========================= -->
+<!-- AUTH -->
 
 <div id="authScreen" class="authWrapper hidden">
 
@@ -711,9 +741,7 @@ tr:last-child td {
 </div>
 
 
-<!-- =========================
-     APP
-========================= -->
+<!-- APP -->
 
 <div id="app" class="hidden">
 
@@ -745,38 +773,23 @@ tr:last-child td {
 
 <nav>
 
-    <button
-        class="navButton active"
-        data-section="shopSection"
-    >
+    <button class="navButton active" data-section="shopSection">
         Магазин
     </button>
 
-    <button
-        class="navButton"
-        data-section="inventorySection"
-    >
+    <button class="navButton" data-section="inventorySection">
         Инвентарь
     </button>
 
-    <button
-        class="navButton"
-        data-section="withdrawSection"
-    >
+    <button class="navButton" data-section="withdrawSection">
         Мои запросы на вывод
     </button>
 
-    <button
-        class="navButton"
-        data-section="tradesSection"
-    >
+    <button class="navButton" data-section="tradesSection">
         Трейды
     </button>
 
-    <button
-        class="navButton"
-        data-section="messagesSection"
-    >
+    <button class="navButton" data-section="messagesSection">
         Сообщения
     </button>
 
@@ -793,14 +806,9 @@ tr:last-child td {
 
 <main>
 
-<!-- =========================
-     SHOP
-========================= -->
+<!-- SHOP -->
 
-<section
-    class="section active"
-    id="shopSection"
->
+<section class="section active" id="shopSection">
 
     <h1 class="sectionTitle">
         Магазин
@@ -810,22 +818,14 @@ tr:last-child td {
         Предметы, доступные для покупки.
     </p>
 
-    <div
-        id="shopGrid"
-        class="grid"
-    ></div>
+    <div id="shopGrid" class="grid"></div>
 
 </section>
 
 
-<!-- =========================
-     INVENTORY
-========================= -->
+<!-- INVENTORY -->
 
-<section
-    class="section"
-    id="inventorySection"
->
+<section class="section" id="inventorySection">
 
     <h1 class="sectionTitle">
         Инвентарь
@@ -835,22 +835,14 @@ tr:last-child td {
         Предметы, которыми вы владеете.
     </p>
 
-    <div
-        id="inventoryGrid"
-        class="grid"
-    ></div>
+    <div id="inventoryGrid" class="grid"></div>
 
 </section>
 
 
-<!-- =========================
-     WITHDRAWALS
-========================= -->
+<!-- WITHDRAWALS -->
 
-<section
-    class="section"
-    id="withdrawSection"
->
+<section class="section" id="withdrawSection">
 
     <h1 class="sectionTitle">
         Мои запросы на вывод
@@ -865,14 +857,9 @@ tr:last-child td {
 </section>
 
 
-<!-- =========================
-     TRADES
-========================= -->
+<!-- TRADES -->
 
-<section
-    class="section"
-    id="tradesSection"
->
+<section class="section" id="tradesSection">
 
     <h1 class="sectionTitle">
         Трейды
@@ -882,10 +869,7 @@ tr:last-child td {
         Обменивайте свои предметы на предметы другого игрока.
     </p>
 
-    <div
-        class="formBox"
-        style="margin-bottom:20px;"
-    >
+    <div class="formBox" style="margin-bottom:20px;">
 
         <h3 style="margin-top:0;">
             Новый трейд
@@ -897,10 +881,7 @@ tr:last-child td {
                 Ник игрока
             </label>
 
-            <input
-                id="tradeTargetNick"
-                type="text"
-            >
+            <input id="tradeTargetNick" type="text">
 
         </div>
 
@@ -927,10 +908,7 @@ tr:last-child td {
 
         </div>
 
-        <button
-            class="primary"
-            id="createTradeButton"
-        >
+        <button class="primary" id="createTradeButton">
             Кинуть запрос на трейд
         </button>
 
@@ -941,14 +919,9 @@ tr:last-child td {
 </section>
 
 
-<!-- =========================
-     MESSAGES
-========================= -->
+<!-- MESSAGES -->
 
-<section
-    class="section"
-    id="messagesSection"
->
+<section class="section" id="messagesSection">
 
     <h1 class="sectionTitle">
         Сообщения
@@ -963,14 +936,9 @@ tr:last-child td {
 </section>
 
 
-<!-- =========================
-     ADMIN
-========================= -->
+<!-- ADMIN -->
 
-<section
-    class="section"
-    id="adminSection"
->
+<section class="section" id="adminSection">
 
     <h1 class="sectionTitle">
         Админ-панель
@@ -1003,17 +971,11 @@ tr:last-child td {
 
             <div style="display:flex;gap:8px;">
 
-                <button
-                    class="danger"
-                    id="banButton"
-                >
+                <button class="danger" id="banButton">
                     Бан
                 </button>
 
-                <button
-                    class="success"
-                    id="unbanButton"
-                >
+                <button class="success" id="unbanButton">
                     Разбан
                 </button>
 
@@ -1064,10 +1026,7 @@ tr:last-child td {
 
             </div>
 
-            <button
-                class="primary"
-                id="giveCoinsButton"
-            >
+            <button class="primary" id="giveCoinsButton">
                 Выдать RedstoneCoin
             </button>
 
@@ -1112,10 +1071,7 @@ tr:last-child td {
 
             </div>
 
-            <button
-                class="primary"
-                id="giveItemButton"
-            >
+            <button class="primary" id="giveItemButton">
                 Выдать предмет
             </button>
 
@@ -1156,7 +1112,22 @@ tr:last-child td {
                     Иконка
                 </label>
 
-                <input id="addItemIcon">
+                <input
+                    id="addItemIcon"
+                    type="text"
+                    placeholder="/images/example.png"
+                >
+
+                <div class="iconHint">
+                    Укажите путь или полный URL любой картинки,
+                    которая уже загружена на GitHub Pages.
+                </div>
+
+                <img
+                    id="addItemIconPreview"
+                    class="itemIconPreview hidden"
+                    alt=""
+                >
 
             </div>
 
@@ -1174,10 +1145,7 @@ tr:last-child td {
 
             </div>
 
-            <button
-                class="primary"
-                id="addItemButton"
-            >
+            <button class="primary" id="addItemButton">
                 Добавить
             </button>
 
@@ -1218,7 +1186,21 @@ tr:last-child td {
                     Иконка
                 </label>
 
-                <input id="editItemIcon">
+                <input
+                    id="editItemIcon"
+                    type="text"
+                    placeholder="/images/example.png"
+                >
+
+                <div class="iconHint">
+                    Можно указать путь или полный URL любой уже загруженной картинки.
+                </div>
+
+                <img
+                    id="editItemIconPreview"
+                    class="itemIconPreview hidden"
+                    alt=""
+                >
 
             </div>
 
@@ -1236,10 +1218,7 @@ tr:last-child td {
 
             </div>
 
-            <button
-                class="primary"
-                id="editItemButton"
-            >
+            <button class="primary" id="editItemButton">
                 Изменить
             </button>
 
@@ -1250,7 +1229,6 @@ tr:last-child td {
 
     <div style="height:25px;"></div>
 
-
     <h2>
         Предметы
     </h2>
@@ -1260,6 +1238,14 @@ tr:last-child td {
 
     <div style="height:25px;"></div>
 
+    <h2>
+        Убраные с продажи
+    </h2>
+
+    <div id="adminRemovedItemsList"></div>
+
+
+    <div style="height:25px;"></div>
 
     <h2>
         Запросы на вывод
@@ -1269,7 +1255,6 @@ tr:last-child td {
 
 
     <div style="height:25px;"></div>
-
 
     <h2>
         Пользователи
@@ -1284,14 +1269,9 @@ tr:last-child td {
 </div>
 
 
-<!-- =========================
-     MODAL
-========================= -->
+<!-- MODAL -->
 
-<div
-    id="modalOverlay"
-    class="modalOverlay hidden"
->
+<div id="modalOverlay" class="modalOverlay hidden">
 
     <div class="modal">
 
@@ -1303,17 +1283,11 @@ tr:last-child td {
 
         <div class="modalActions">
 
-            <button
-                class="secondary"
-                id="modalCancel"
-            >
+            <button class="secondary" id="modalCancel">
                 Отмена
             </button>
 
-            <button
-                class="primary"
-                id="modalConfirm"
-            >
+            <button class="primary" id="modalConfirm">
                 Подтвердить
             </button>
 
@@ -1392,7 +1366,7 @@ document
         button.addEventListener("click", () => {
 
             if (
-                termsOverlay.classList.contains("hidden") === false
+                !termsOverlay.classList.contains("hidden")
             ) {
                 return;
             }
@@ -1809,6 +1783,94 @@ async function refreshAll() {
 
 
 /* =========================
+   ICON HELPERS
+========================= */
+
+/*
+ * Разрешает:
+ * /images/test.png
+ * /assets/test.webp
+ * images/test.png
+ * https://example.com/test.png
+ */
+function normalizeIconUrl(value) {
+
+    const icon =
+        String(value || "").trim();
+
+    if (!icon) {
+        return "";
+    }
+
+    if (
+        icon.startsWith("http://") ||
+        icon.startsWith("https://") ||
+        icon.startsWith("data:")
+    ) {
+        return icon;
+    }
+
+    if (icon.startsWith("/")) {
+        return icon;
+    }
+
+    return "/" + icon;
+}
+
+
+function setIconPreview(inputId, previewId) {
+
+    const input =
+        document.getElementById(inputId);
+
+    const preview =
+        document.getElementById(previewId);
+
+    if (!input || !preview) {
+        return;
+    }
+
+    const update = () => {
+
+        const url =
+            normalizeIconUrl(input.value);
+
+        if (!url) {
+
+            preview.src = "";
+            preview.classList.add("hidden");
+
+            return;
+        }
+
+        preview.src = url;
+        preview.classList.remove("hidden");
+    };
+
+    input.addEventListener("input", update);
+
+    preview.addEventListener("error", () => {
+        preview.classList.add("hidden");
+    });
+
+    preview.addEventListener("load", () => {
+        preview.classList.remove("hidden");
+    });
+}
+
+
+setIconPreview(
+    "addItemIcon",
+    "addItemIconPreview"
+);
+
+setIconPreview(
+    "editItemIcon",
+    "editItemIconPreview"
+);
+
+
+/* =========================
    SHOP
 ========================= */
 
@@ -1845,13 +1907,24 @@ async function loadShop() {
 
         card.className = "card";
 
+        const icon =
+            normalizeIconUrl(item.icon);
+
         card.innerHTML = `
-            <img
-                class="itemIcon"
-                src="${escapeAttr(item.icon)}"
-                alt=""
-                onerror="this.style.display='none'"
-            >
+            ${
+                icon
+                    ? `
+                        <img
+                            class="itemIcon"
+                            src="${escapeAttr(icon)}"
+                            alt=""
+                            onerror="this.style.visibility='hidden'"
+                        >
+                    `
+                    : `
+                        <div class="itemIcon"></div>
+                    `
+            }
 
             <div class="itemName">
                 ${escapeHtml(item.name)}
@@ -1977,13 +2050,24 @@ async function loadInventory() {
 
         card.className = "card";
 
+        const icon =
+            normalizeIconUrl(item.icon);
+
         card.innerHTML = `
-            <img
-                class="itemIcon"
-                src="${escapeAttr(item.icon)}"
-                alt=""
-                onerror="this.style.display='none'"
-            >
+            ${
+                icon
+                    ? `
+                        <img
+                            class="itemIcon"
+                            src="${escapeAttr(icon)}"
+                            alt=""
+                            onerror="this.style.visibility='hidden'"
+                        >
+                    `
+                    : `
+                        <div class="itemIcon"></div>
+                    `
+            }
 
             <div class="itemName">
                 ${escapeHtml(item.name)}
@@ -2512,12 +2596,6 @@ document
                     .value
                     .trim();
 
-
-            /*
-             * inventory.id - UUID.
-             * Нельзя использовать Number().
-             */
-
             const myInventoryIds =
                 [
                     ...document.querySelectorAll(
@@ -2528,7 +2606,6 @@ document
                     x => x.value
                 );
 
-
             const theirText =
                 document
                     .getElementById(
@@ -2536,12 +2613,6 @@ document
                     )
                     .value
                     .trim();
-
-
-            /*
-             * ID предметов другого игрока
-             * тоже передаются как строки.
-             */
 
             const theirInventoryIds =
                 theirText
@@ -2554,7 +2625,6 @@ document
                             Boolean
                         )
                     : [];
-
 
             try {
 
@@ -2577,20 +2647,17 @@ document
                     false
                 );
 
-
                 document
                     .getElementById(
                         "tradeTargetNick"
                     )
                     .value = "";
 
-
                 document
                     .getElementById(
                         "tradeTheirItems"
                     )
                     .value = "";
-
 
                 document
                     .querySelectorAll(
@@ -2599,7 +2666,6 @@ document
                     .forEach(
                         x => x.checked = false
                     );
-
 
                 await loadTrades();
 
@@ -2721,11 +2787,75 @@ async function loadAdminUsers() {
 }
 
 
+/* =========================
+   ADMIN ITEMS
+========================= */
+
+function createAdminItemRow(item) {
+
+    const icon =
+        normalizeIconUrl(item.icon);
+
+    return `
+        <tr>
+
+            <td>
+                ${
+                    icon
+                        ? `
+                            <img
+                                class="tableIcon"
+                                src="${escapeAttr(icon)}"
+                                alt=""
+                                onerror="this.style.visibility='hidden'"
+                            >
+                        `
+                        : `
+                            <div class="tableIcon"></div>
+                        `
+                }
+            </td>
+
+            <td>
+                ${escapeHtml(item.id)}
+            </td>
+
+            <td>
+                ${escapeHtml(item.name)}
+            </td>
+
+            <td>
+                ${Number(
+                    item.price
+                ).toLocaleString("ru-RU")} RC
+            </td>
+
+            <td>
+
+                <button
+                    class="secondary"
+                    data-sale-id="${escapeAttr(item.id)}"
+                >
+                    Снять с продажи
+                </button>
+
+            </td>
+
+        </tr>
+    `;
+}
+
+
 async function loadAdminItems() {
 
     const container =
         document.getElementById(
             "adminItemsList"
+        );
+
+    const removedContainer =
+        document.getElementById(
+            "adminRemovedItemsList"
         );
 
     const data =
@@ -2734,97 +2864,162 @@ async function loadAdminItems() {
     const items =
         data.items || [];
 
-    if (!items.length) {
+    const activeItems =
+        items.filter(
+            item => Boolean(item.on_sale)
+        );
+
+    const removedItems =
+        items.filter(
+            item => !Boolean(item.on_sale)
+        );
+
+
+    /* ACTIVE */
+
+    if (!activeItems.length) {
 
         container.innerHTML =
             `<div class="empty">
-                Предметов нет.
+                Предметов в продаже нет.
             </div>`;
 
-        return;
-    }
+    } else {
 
-    let html = `
-        <div class="tableWrapper">
+        let html = `
+            <div class="tableWrapper">
 
-        <table>
+            <table>
 
-            <thead>
+                <thead>
 
-                <tr>
-                    <th>ID</th>
-                    <th>Название</th>
-                    <th>Цена</th>
-                    <th>Продажа</th>
-                    <th></th>
-                </tr>
+                    <tr>
+                        <th>Иконка</th>
+                        <th>ID</th>
+                        <th>Название</th>
+                        <th>Цена</th>
+                        <th></th>
+                    </tr>
 
-            </thead>
+                </thead>
 
-            <tbody>
-    `;
+                <tbody>
+        `;
 
-    items.forEach(item => {
+        activeItems.forEach(item => {
+            html += createAdminItemRow(item);
+        });
 
         html += `
-            <tr>
+                </tbody>
 
-                <td>
-                    ${escapeHtml(item.id)}
-                </td>
+            </table>
 
-                <td>
-                    ${escapeHtml(item.name)}
-                </td>
-
-                <td>
-                    ${Number(
-                        item.price
-                    ).toLocaleString("ru-RU")} RC
-                </td>
-
-                <td>
-                    ${
-                        item.on_sale
-                            ? "В продаже"
-                            : "Снято"
-                    }
-                </td>
-
-                <td>
-
-                    <button
-                        class="secondary"
-                        data-sale-id="${escapeAttr(item.id)}"
-                        data-sale-value="${
-                            item.on_sale
-                                ? "1"
-                                : "0"
-                        }"
-                    >
-                        ${
-                            item.on_sale
-                                ? "Снять с продажи"
-                                : "Вернуть в продажу"
-                        }
-                    </button>
-
-                </td>
-
-            </tr>
+            </div>
         `;
-    });
 
-    html += `
-            </tbody>
+        container.innerHTML = html;
+    }
 
-        </table>
 
-        </div>
-    `;
+    /* REMOVED */
 
-    container.innerHTML = html;
+    if (!removedItems.length) {
 
+        removedContainer.innerHTML =
+            `<div class="empty">
+                Нет предметов, снятых с продажи.
+            </div>`;
+
+    } else {
+
+        let html = `
+            <div class="tableWrapper">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>Иконка</th>
+                        <th>ID</th>
+                        <th>Название</th>
+                        <th>Цена</th>
+                        <th></th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+        `;
+
+        removedItems.forEach(item => {
+
+            const icon =
+                normalizeIconUrl(item.icon);
+
+            html += `
+                <tr>
+
+                    <td>
+                        ${
+                            icon
+                                ? `
+                                    <img
+                                        class="tableIcon"
+                                        src="${escapeAttr(icon)}"
+                                        alt=""
+                                        onerror="this.style.visibility='hidden'"
+                                    >
+                                `
+                                : `
+                                    <div class="tableIcon"></div>
+                                `
+                        }
+                    </td>
+
+                    <td>
+                        ${escapeHtml(item.id)}
+                    </td>
+
+                    <td>
+                        ${escapeHtml(item.name)}
+                    </td>
+
+                    <td>
+                        ${Number(
+                            item.price
+                        ).toLocaleString("ru-RU")} RC
+                    </td>
+
+                    <td>
+
+                        <button
+                            class="success"
+                            data-restore-id="${escapeAttr(item.id)}"
+                        >
+                            Вернуть в продажу
+                        </button>
+
+                    </td>
+
+                </tr>
+            `;
+        });
+
+        html += `
+                </tbody>
+
+            </table>
+
+            </div>
+        `;
+
+        removedContainer.innerHTML = html;
+    }
+
+
+    /* SALE BUTTONS */
 
     container
         .querySelectorAll(
@@ -2839,9 +3034,55 @@ async function loadAdminItems() {
                     const id =
                         button.dataset.saleId;
 
-                    const current =
-                        button.dataset.saleValue ===
-                        "1";
+                    try {
+
+                        await api(
+                            "/api/admin/items/sale",
+                            {
+                                method: "POST",
+
+                                body:
+                                    JSON.stringify({
+                                        id,
+                                        onSale: false
+                                    })
+                            }
+                        );
+
+                        showToast(
+                            "Предмет снят с продажи",
+                            false
+                        );
+
+                        await loadAdminItems();
+                        await loadShop();
+
+                    } catch (error) {
+
+                        showToast(
+                            error.message,
+                            true
+                        );
+                    }
+                }
+            );
+        });
+
+
+    /* RESTORE BUTTONS */
+
+    removedContainer
+        .querySelectorAll(
+            "[data-restore-id]"
+        )
+        .forEach(button => {
+
+            button.addEventListener(
+                "click",
+                async () => {
+
+                    const id =
+                        button.dataset.restoreId;
 
                     try {
 
@@ -2853,15 +3094,13 @@ async function loadAdminItems() {
                                 body:
                                     JSON.stringify({
                                         id,
-                                        onSale: !current
+                                        onSale: true
                                     })
                             }
                         );
 
                         showToast(
-                            !current
-                                ? "Предмет возвращён в продажу"
-                                : "Предмет снят с продажи",
+                            "Предмет возвращён в продажу",
                             false
                         );
 
@@ -2880,6 +3119,10 @@ async function loadAdminItems() {
         });
 }
 
+
+/* =========================
+   ADMIN WITHDRAWALS
+========================= */
 
 async function loadAdminWithdrawals() {
 
@@ -2968,8 +3211,7 @@ async function loadAdminWithdrawals() {
                 () => {
 
                     openCodeModal(
-                        button.dataset
-                            .approveWithdraw
+                        button.dataset.approveWithdraw
                     );
                 }
             );
@@ -3015,6 +3257,7 @@ async function loadAdminWithdrawals() {
                                 );
 
                                 await loadAdminWithdrawals();
+                                await loadInventory();
 
                             } catch (error) {
 
@@ -3085,13 +3328,11 @@ document
                     false
                 );
 
-
                 document
                     .getElementById(
                         "giveCoinsNick"
                     )
                     .value = "";
-
 
                 document
                     .getElementById(
@@ -3099,14 +3340,13 @@ document
                     )
                     .value = "";
 
-
                 document
                     .getElementById(
                         "giveCoinsReason"
                     )
                     .value = "";
 
-
+                await refreshMe();
                 await loadAdminUsers();
 
             } catch (error) {
@@ -3207,13 +3447,11 @@ document
                     false
                 );
 
-
                 document
                     .getElementById(
                         "giveItemNick"
                     )
                     .value = "";
-
 
                 document
                     .getElementById(
@@ -3336,6 +3574,15 @@ document
 
             try {
 
+                const icon =
+                    normalizeIconUrl(
+                        document
+                            .getElementById(
+                                "addItemIcon"
+                            )
+                            .value
+                    );
+
                 await api(
                     "/api/admin/items/add",
                     {
@@ -3360,13 +3607,7 @@ document
                                         .value
                                         .trim(),
 
-                                icon:
-                                    document
-                                        .getElementById(
-                                            "addItemIcon"
-                                        )
-                                        .value
-                                        .trim(),
+                                icon,
 
                                 price:
                                     Number(
@@ -3385,6 +3626,36 @@ document
                     "Предмет добавлен",
                     false
                 );
+
+                document
+                    .getElementById(
+                        "addItemId"
+                    )
+                    .value = "";
+
+                document
+                    .getElementById(
+                        "addItemName"
+                    )
+                    .value = "";
+
+                document
+                    .getElementById(
+                        "addItemIcon"
+                    )
+                    .value = "";
+
+                document
+                    .getElementById(
+                        "addItemPrice"
+                    )
+                    .value = "";
+
+                document
+                    .getElementById(
+                        "addItemIconPreview"
+                    )
+                    .classList.add("hidden");
 
                 await loadAdminItems();
                 await loadShop();
@@ -3413,6 +3684,15 @@ document
 
             try {
 
+                const icon =
+                    normalizeIconUrl(
+                        document
+                            .getElementById(
+                                "editItemIcon"
+                            )
+                            .value
+                    );
+
                 await api(
                     "/api/admin/items/edit",
                     {
@@ -3437,13 +3717,7 @@ document
                                         .value
                                         .trim(),
 
-                                icon:
-                                    document
-                                        .getElementById(
-                                            "editItemIcon"
-                                        )
-                                        .value
-                                        .trim(),
+                                icon,
 
                                 price:
                                     Number(
@@ -3521,10 +3795,23 @@ document
             const action =
                 modalAction;
 
-            closeModal();
+            if (!action) {
+                closeModal();
+                return;
+            }
 
-            if (action) {
+            const button =
+                document.getElementById(
+                    "modalConfirm"
+                );
+
+            button.disabled = true;
+
+            try {
                 await action();
+            } finally {
+                button.disabled = false;
+                closeModal();
             }
         }
     );
@@ -3578,8 +3865,10 @@ function openCodeModal(
             "input"
         );
 
+    input.type = "text";
     input.placeholder =
         "Например: ABC-742-X9";
+    input.autocomplete = "off";
 
 
     content.appendChild(label);
@@ -3618,7 +3907,10 @@ function openCodeModal(
 
                         body:
                             JSON.stringify({
-                                withdrawalId,
+                                withdrawalId:
+                                    String(
+                                        withdrawalId
+                                    ),
                                 code
                             })
                     }
@@ -3639,6 +3931,8 @@ function openCodeModal(
                 );
             }
         };
+
+    input.focus();
 }
 
 
