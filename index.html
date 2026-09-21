@@ -1,1 +1,255 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>RedstoneGifts</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100%;
+            font-family: Arial, sans-serif;
+            background: #0f0f14;
+            color: #ffffff;
+        }
+
+        body {
+            min-height: 100vh;
+        }
+
+        /* =========================
+           MAIN SITE
+        ========================= */
+
+        #site {
+            min-height: 100vh;
+        }
+
+        header {
+            height: 70px;
+            padding: 0 30px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            background: #17171f;
+            border-bottom: 1px solid #292934;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .header-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        button {
+            border: none;
+            border-radius: 8px;
+            padding: 10px 16px;
+
+            background: #d62828;
+            color: white;
+
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #b71f1f;
+        }
+
+        main {
+            padding: 40px;
+        }
+
+        .welcome {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 30px;
+
+            background: #17171f;
+            border: 1px solid #292934;
+            border-radius: 12px;
+        }
+
+        .welcome h1 {
+            margin-top: 0;
+        }
+
+        /* =========================
+           TERMS MODAL
+        ========================= */
+
+        #terms-overlay {
+            position: fixed;
+            inset: 0;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: rgba(0, 0, 0, 0.88);
+
+            z-index: 999999;
+        }
+
+        #terms-window {
+            width: min(600px, calc(100% - 30px));
+            max-height: calc(100vh - 40px);
+
+            padding: 30px;
+
+            background: #181820;
+            border: 1px solid #343440;
+            border-radius: 14px;
+
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+
+            overflow-y: auto;
+        }
+
+        #terms-window h2 {
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        #terms-window p {
+            line-height: 1.6;
+            color: #d0d0d8;
+        }
+
+        .warning {
+            margin: 20px 0;
+            padding: 15px;
+
+            background: #241b1b;
+            border-left: 4px solid #d62828;
+
+            border-radius: 6px;
+
+            color: #eeeeee;
+        }
+
+        #accept-terms {
+            width: 100%;
+            margin-top: 10px;
+            padding: 13px;
+
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        /* Сайт изначально полностью заблокирован */
+
+        #site.locked {
+            pointer-events: none;
+            user-select: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         ОСНОВНОЙ САЙТ
+    ========================== -->
+
+    <div id="site" class="locked">
+
+        <header>
+            <div class="logo">
+                RedstoneGifts
+            </div>
+
+            <div class="header-buttons">
+                <button>Войти</button>
+                <button>Регистрация</button>
+            </div>
+        </header>
+
+        <main>
+            <div class="welcome">
+                <h1>Добро пожаловать в RedstoneGifts</h1>
+
+                <p>
+                    Здесь будет магазин, RedstoneCoin, инвентарь,
+                    трейды, сообщения и система вывода предметов.
+                </p>
+            </div>
+        </main>
+
+    </div>
+
+
+    <!-- =========================
+         УСЛОВИЯ ПОЛЬЗОВАНИЯ
+    ========================== -->
+
+    <div id="terms-overlay">
+
+        <div id="terms-window">
+
+            <h2>Условия пользования</h2>
+
+            <p>
+                Перед использованием RedstoneGifts ознакомьтесь
+                с условиями пользования сервисом.
+            </p>
+
+            <div class="warning">
+                Используя RedstoneGifts, вы понимаете и принимаете,
+                что сервис предоставляется как есть.
+            </div>
+
+            <p>
+                Администрация RedstoneGifts не несёт ответственности
+                за возможную потерю виртуальных предметов, RedstoneCoin,
+                данные аккаунта или другие последствия использования
+                сервиса.
+            </p>
+
+            <p>
+                Пользователь самостоятельно отвечает за сохранность
+                своих данных для входа в аккаунт.
+            </p>
+
+            <p>
+                Если вы не согласны с данными условиями, пожалуйста,
+                не используйте RedstoneGifts.
+            </p>
+
+            <button id="accept-terms">
+                ОК
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <script>
+        const termsOverlay = document.getElementById("terms-overlay");
+        const acceptButton = document.getElementById("accept-terms");
+        const site = document.getElementById("site");
+
+        acceptButton.addEventListener("click", function () {
+            termsOverlay.style.display = "none";
+            site.classList.remove("locked");
+        });
+    </script>
+
+</body>
+</html>
