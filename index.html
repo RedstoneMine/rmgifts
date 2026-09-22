@@ -5687,7 +5687,9 @@ function getQuestEditorRewards() {
             if (type === "coins") {
 
                 return {
+                    type: "coins",
                     reward_type: "coins",
+
                     coins: Number(
                         editor.querySelector(
                             ".questRewardCoins"
@@ -5698,7 +5700,9 @@ function getQuestEditorRewards() {
             }
 
             return {
+                type: "item",
                 reward_type: "item",
+
                 item_id:
                     editor.querySelector(
                         ".questRewardItem"
