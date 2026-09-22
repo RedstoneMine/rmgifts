@@ -729,6 +729,173 @@ tr:last-child td {
 }
 
 /* =========================
+   QUESTS
+========================= */
+
+.questGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 15px;
+}
+
+.questCard {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 19px;
+    transition: opacity .2s, border-color .2s;
+}
+
+.questCard.completed {
+    border-color: #326b4c;
+}
+
+.questCard.claimed {
+    opacity: .48;
+}
+
+.questCard.awaiting {
+    border-color: #78652a;
+}
+
+.questTitle {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 9px;
+}
+
+.questDescription {
+    color: #c7c7d0;
+    line-height: 1.55;
+    white-space: pre-wrap;
+    margin-bottom: 16px;
+}
+
+.questType {
+    color: var(--muted);
+    font-size: 12px;
+    margin-bottom: 12px;
+}
+
+.questProgressBox {
+    background: #101017;
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    padding: 11px;
+    margin-bottom: 13px;
+}
+
+.questProgressText {
+    font-size: 13px;
+    color: #d4d4dc;
+    margin-bottom: 8px;
+}
+
+.questProgressBar {
+    width: 100%;
+    height: 7px;
+    background: #292934;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.questProgressFill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 20px;
+    transition: width .2s;
+}
+
+.questRewards {
+    margin-bottom: 15px;
+}
+
+.questRewardsTitle {
+    color: var(--muted);
+    font-size: 12px;
+    margin-bottom: 6px;
+}
+
+.questReward {
+    color: #e7e7ec;
+    font-size: 13px;
+    margin-top: 4px;
+}
+
+.questStatus {
+    color: var(--muted);
+    font-size: 13px;
+    margin-bottom: 12px;
+}
+
+.questTimer {
+    color: var(--yellow);
+    font-weight: 700;
+}
+
+.questTextButton {
+    width: 100%;
+}
+
+.questAdminActions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+}
+
+.questAdminActions button {
+    flex: 1;
+}
+
+.rewardEditor {
+    border: 1px solid var(--border);
+    background: #101017;
+    border-radius: 9px;
+    padding: 12px;
+    margin-bottom: 9px;
+}
+
+.rewardEditorRow {
+    display: grid;
+    grid-template-columns: 130px 1fr auto;
+    gap: 8px;
+    align-items: end;
+}
+
+.questSubmission {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 11px;
+    padding: 16px;
+    margin-bottom: 11px;
+}
+
+.questSubmissionText {
+    background: #101017;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 11px;
+    margin: 10px 0;
+    white-space: pre-wrap;
+    line-height: 1.5;
+}
+
+.questAdminEditBox {
+    background: #101017;
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    padding: 13px;
+    margin-top: 13px;
+}
+
+@media (max-width: 600px) {
+    .rewardEditorRow {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* =========================
    TOAST
 ========================= */
 
@@ -776,6 +943,8 @@ tr:last-child td {
 
 .modal {
     width: min(550px, 100%);
+    max-height: 90vh;
+    overflow-y: auto;
     background: var(--panel);
     border: 1px solid var(--border);
     border-radius: 13px;
@@ -1000,6 +1169,10 @@ tr:last-child td {
         Трейды
     </button>
 
+    <button class="navButton" data-section="questsSection">
+        Задания
+    </button>
+
     <button class="navButton" data-section="messagesSection">
         Сообщения
     </button>
@@ -1117,8 +1290,6 @@ tr:last-child td {
 
         <div class="tradeWindows">
 
-            <!-- OWN WINDOW -->
-
             <div class="tradeWindow">
 
                 <h3 class="tradeWindowTitle">
@@ -1143,8 +1314,6 @@ tr:last-child td {
 
             </div>
 
-
-            <!-- TARGET WINDOW -->
 
             <div class="tradeWindow">
 
@@ -1200,6 +1369,23 @@ tr:last-child td {
     <div style="height:25px;"></div>
 
     <div id="tradesList"></div>
+
+</section>
+
+
+<!-- QUESTS -->
+
+<section class="section" id="questsSection">
+
+    <h1 class="sectionTitle">
+        Задания
+    </h1>
+
+    <p class="sectionDescription">
+        Выполняйте задания и получайте RedstoneCoin или предметы.
+    </p>
+
+    <div id="questsGrid" class="questGrid"></div>
 
 </section>
 
@@ -1512,6 +1698,170 @@ tr:last-child td {
     </div>
 
 
+    <!-- ADMIN QUESTS -->
+
+    <div style="height:25px;"></div>
+
+    <h2>
+        Задания
+    </h2>
+
+    <div class="adminGrid">
+
+        <div class="adminBox">
+
+            <h3 id="questEditorTitle">
+                Добавить задание
+            </h3>
+
+            <div class="formGroup">
+
+                <label>
+                    Название
+                </label>
+
+                <input
+                    id="adminQuestName"
+                    maxlength="120"
+                    placeholder="Например: Торговец"
+                >
+
+            </div>
+
+            <div class="formGroup">
+
+                <label>
+                    Описание
+                </label>
+
+                <textarea
+                    id="adminQuestDescription"
+                    placeholder="Текст задания..."
+                ></textarea>
+
+            </div>
+
+            <div class="formGroup">
+
+                <label>
+                    Тип задания
+                </label>
+
+                <select id="adminQuestType">
+
+                    <option value="trades">
+                        Трейды
+                    </option>
+
+                    <option value="time">
+                        Время на сайте
+                    </option>
+
+                    <option value="link">
+                        Перейти по ссылке
+                    </option>
+
+                    <option value="text">
+                        Текстовый ответ
+                    </option>
+
+                </select>
+
+            </div>
+
+            <div
+                class="formGroup"
+                id="adminQuestConditionGroup"
+            >
+
+                <label id="adminQuestConditionLabel">
+                    Количество трейдов
+                </label>
+
+                <input
+                    id="adminQuestCondition"
+                    type="number"
+                    min="1"
+                    value="1"
+                >
+
+            </div>
+
+            <div
+                class="formGroup hidden"
+                id="adminQuestLinkGroup"
+            >
+
+                <label>
+                    Ссылка
+                </label>
+
+                <input
+                    id="adminQuestLink"
+                    type="url"
+                    placeholder="https://example.com"
+                >
+
+            </div>
+
+
+            <div class="formGroup">
+
+                <label>
+                    Награды
+                </label>
+
+                <div id="adminQuestRewards"></div>
+
+                <button
+                    class="secondary"
+                    type="button"
+                    id="addQuestRewardButton"
+                    style="margin-top:8px;"
+                >
+                    + Добавить награду
+                </button>
+
+            </div>
+
+
+            <div style="display:flex;gap:8px;flex-wrap:wrap;">
+
+                <button
+                    class="primary"
+                    id="saveQuestButton"
+                >
+                    Создать задание
+                </button>
+
+                <button
+                    class="secondary hidden"
+                    id="cancelQuestEditButton"
+                >
+                    Отмена редактирования
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div style="height:25px;"></div>
+
+    <div id="adminQuestsList"></div>
+
+
+    <div style="height:25px;"></div>
+
+    <h2>
+        Ответы на текстовые задания
+    </h2>
+
+    <div id="adminQuestSubmissions"></div>
+
+
     <div style="height:25px;"></div>
 
     <h2>
@@ -1620,6 +1970,20 @@ let loadedTradeTargetNick = "";
 
 
 /* =========================
+   QUEST STATE
+========================= */
+
+let questsCache = [];
+
+let questTimerIntervals =
+    new Map();
+
+let editingQuestId = null;
+
+let adminItemsCache = [];
+
+
+/* =========================
    DOM
 ========================= */
 
@@ -1719,6 +2083,10 @@ async function loadSection(section) {
             await loadTradeItems();
         }
 
+        if (section === "questsSection") {
+            await loadQuests();
+        }
+
         if (section === "messagesSection") {
             await loadMessages();
         }
@@ -1787,6 +2155,8 @@ async function api(path, options = {}) {
 
             currentUser = null;
             currentIsAdmin = false;
+
+            stopQuestTimers();
 
             showAuth();
         }
@@ -1983,6 +2353,8 @@ function showAuth() {
     app.classList.add("hidden");
 
     adminNav.classList.add("hidden");
+
+    stopQuestTimers();
 }
 
 
@@ -2033,6 +2405,8 @@ document
         currentUser = null;
         currentIsAdmin = false;
 
+        stopQuestTimers();
+
         showAuth();
     });
 
@@ -2071,6 +2445,7 @@ async function refreshAll() {
         loadInventory(),
         loadWithdrawals(),
         loadTrades(),
+        loadQuests(),
         loadMessages()
     ]);
 
@@ -2594,15 +2969,6 @@ async function loadMessages() {
 
         box.className = "message";
 
-        /*
-         * Новые trade-сообщения от Worker
-         * хранят объект JSON в message.content.
-         *
-         * Старые сообщения могут содержать
-         * обычный текст, поэтому при ошибке
-         * разбора мы просто показываем текст.
-         */
-
         let tradeData = null;
 
         if (message.type === "trade") {
@@ -2789,7 +3155,8 @@ async function loadMessages() {
                             loadMessages(),
                             loadTrades(),
                             loadInventory(),
-                            loadTradeItems()
+                            loadTradeItems(),
+                            loadQuests()
                         ]);
 
                     } catch (error) {
@@ -2860,12 +3227,6 @@ async function loadMessages() {
         });
 }
 
-
-/*
- * Рисует предметы внутри сообщения-трейда.
- * Здесь нет кнопок и ID - это только
- * визуальная копия предложения.
- */
 
 function renderMessageTradeItems(items) {
 
@@ -3506,6 +3867,7 @@ async function loadTrades() {
                         await loadTrades();
                         await loadInventory();
                         await loadTradeItems();
+                        await loadQuests();
 
                     } catch (error) {
 
@@ -3714,8 +4076,1185 @@ document
     );
 
 
+/* =========================================================
+   QUESTS
+========================================================= */
+
+
 /* =========================
+   QUEST HELPERS
+========================= */
+
+function getQuestTypeName(type) {
+
+    if (type === "trades") {
+        return "Трейды";
+    }
+
+    if (type === "time") {
+        return "Время на сайте";
+    }
+
+    if (type === "link") {
+        return "Переход по ссылке";
+    }
+
+    if (type === "text") {
+        return "Текстовый ответ";
+    }
+
+    return "Задание";
+}
+
+
+function getQuestRewardText(reward) {
+
+    if (!reward) {
+        return "Награда";
+    }
+
+    if (
+        reward.reward_type === "coins" ||
+        reward.type === "coins"
+    ) {
+
+        return (
+            Number(
+                reward.coins || 0
+            ).toLocaleString("ru-RU") +
+            " RC"
+        );
+    }
+
+    if (
+        reward.reward_type === "item" ||
+        reward.type === "item"
+    ) {
+
+        return (
+            reward.item_name ||
+            reward.name ||
+            "Предмет"
+        );
+    }
+
+    return "Награда";
+}
+
+
+function formatDuration(seconds) {
+
+    seconds =
+        Math.max(
+            0,
+            Math.floor(
+                Number(seconds) || 0
+            )
+        );
+
+    const hours =
+        Math.floor(seconds / 3600);
+
+    const minutes =
+        Math.floor(
+            (seconds % 3600) / 60
+        );
+
+    const secs =
+        seconds % 60;
+
+    if (hours > 0) {
+
+        return (
+            hours +
+            " ч " +
+            String(minutes).padStart(2, "0") +
+            " мин " +
+            String(secs).padStart(2, "0") +
+            " сек"
+        );
+    }
+
+    if (minutes > 0) {
+
+        return (
+            minutes +
+            " мин " +
+            String(secs).padStart(2, "0") +
+            " сек"
+        );
+    }
+
+    return secs + " сек";
+}
+
+
+function formatQuestProgress(
+    quest,
+    progress
+) {
+
+    const type =
+        quest.type;
+
+    const value =
+        Number(
+            progress?.progress || 0
+        );
+
+    const condition =
+        Number(
+            quest.condition_value || 0
+        );
+
+    if (type === "trades") {
+
+        return (
+            Math.min(value, condition) +
+            " / " +
+            condition +
+            " трейдов"
+        );
+    }
+
+    if (type === "time") {
+
+        return (
+            formatDuration(
+                Math.min(
+                    value,
+                    condition
+                )
+            ) +
+            " / " +
+            formatDuration(condition)
+        );
+    }
+
+    if (type === "link") {
+
+        return value > 0
+            ? "Ссылка посещена"
+            : "Ссылка ещё не открыта";
+    }
+
+    if (type === "text") {
+
+        if (
+            progress?.status ===
+            "awaiting_review"
+        ) {
+            return "Ответ отправлен на проверку";
+        }
+
+        if (
+            progress?.status ===
+            "completed"
+        ) {
+            return "Ответ одобрен";
+        }
+
+        return "Ответ ещё не отправлен";
+    }
+
+    return "";
+}
+
+
+function getQuestPercent(
+    quest,
+    progress
+) {
+
+    const condition =
+        Number(
+            quest.condition_value || 0
+        );
+
+    if (quest.type === "link") {
+        return progress?.progress ? 100 : 0;
+    }
+
+    if (quest.type === "text") {
+        return (
+            progress?.status === "completed"
+                ? 100
+                : 0
+        );
+    }
+
+    if (condition <= 0) {
+        return 0;
+    }
+
+    const value =
+        Number(
+            progress?.progress || 0
+        );
+
+    return Math.min(
+        100,
+        Math.max(
+            0,
+            (value / condition) * 100
+        )
+    );
+}
+
+
+/* =========================
+   QUEST TIMER
+========================= */
+
+function stopQuestTimer(questId) {
+
+    const timer =
+        questTimerIntervals.get(
+            String(questId)
+        );
+
+    if (timer) {
+
+        clearInterval(timer);
+
+        questTimerIntervals.delete(
+            String(questId)
+        );
+    }
+}
+
+
+function stopQuestTimers() {
+
+    questTimerIntervals.forEach(
+        timer => clearInterval(timer)
+    );
+
+    questTimerIntervals.clear();
+}
+
+
+function startQuestTimer(
+    quest
+) {
+
+    stopQuestTimer(quest.id);
+
+    const progress =
+        quest.progress || {};
+
+    if (
+        progress.status !== "active" ||
+        quest.type !== "time"
+    ) {
+        return;
+    }
+
+    const acceptedAt =
+        Number(
+            progress.accepted_at || 0
+        );
+
+    if (!acceptedAt) {
+        return;
+    }
+
+    const tick = async () => {
+
+        const currentProgress =
+            quest.progress || {};
+
+        if (
+            currentProgress.status !==
+            "active"
+        ) {
+
+            stopQuestTimer(quest.id);
+            return;
+        }
+
+        const seconds =
+            Math.max(
+                0,
+                Math.floor(
+                    (Date.now() - acceptedAt) /
+                    1000
+                )
+            );
+
+        updateQuestTimerVisual(
+            quest.id,
+            Math.min(
+                seconds,
+                Number(
+                    quest.condition_value || 0
+                )
+            )
+        );
+
+        if (
+            seconds >=
+            Number(
+                quest.condition_value || 0
+            )
+        ) {
+
+            stopQuestTimer(quest.id);
+
+            try {
+
+                await api(
+                    "/api/quests/time",
+                    {
+                        method: "POST",
+
+                        body:
+                            JSON.stringify({
+                                questId:
+                                    quest.id
+                            })
+                    }
+                );
+
+                await loadQuests();
+
+            } catch (error) {
+
+                showToast(
+                    error.message,
+                    true
+                );
+            }
+
+            return;
+        }
+
+        /*
+         * Не отправляем запрос каждую секунду.
+         * Сервер синхронизирует состояние,
+         * когда это действительно необходимо.
+         */
+        if (
+            seconds > 0 &&
+            seconds % 15 === 0
+        ) {
+
+            try {
+
+                await api(
+                    "/api/quests/time",
+                    {
+                        method: "POST",
+
+                        body:
+                            JSON.stringify({
+                                questId:
+                                    quest.id
+                            })
+                    }
+                );
+
+            } catch (error) {
+
+                showToast(
+                    error.message,
+                    true
+                );
+            }
+        }
+    };
+
+    tick();
+
+    const interval =
+        setInterval(
+            tick,
+            1000
+        );
+
+    questTimerIntervals.set(
+        String(quest.id),
+        interval
+    );
+}
+
+
+function updateQuestTimerVisual(
+    questId,
+    seconds
+) {
+
+    const element =
+        document.querySelector(
+            `[data-quest-timer="${CSS.escape(String(questId))}"]`
+        );
+
+    if (element) {
+
+        element.textContent =
+            formatDuration(seconds);
+    }
+
+    const progressText =
+        document.querySelector(
+            `[data-quest-progress-text="${CSS.escape(String(questId))}"]`
+        );
+
+    if (!progressText) {
+        return;
+    }
+
+    const quest =
+        questsCache.find(
+            q =>
+                String(q.id) ===
+                String(questId)
+        );
+
+    if (!quest) {
+        return;
+    }
+
+    progressText.textContent =
+        formatQuestProgress(
+            quest,
+            {
+                ...(quest.progress || {}),
+                progress: seconds
+            }
+        );
+}
+
+
+/* =========================
+   LOAD QUESTS
+========================= */
+
+async function loadQuests() {
+
+    const container =
+        document.getElementById(
+            "questsGrid"
+        );
+
+    if (!container) {
+        return;
+    }
+
+    container.innerHTML =
+        `<div class="empty">Загрузка...</div>`;
+
+    stopQuestTimers();
+
+    const data =
+        await api("/api/quests");
+
+    questsCache =
+        data.quests || [];
+
+    if (!questsCache.length) {
+
+        container.innerHTML =
+            `<div class="empty">
+                Сейчас нет доступных заданий.
+            </div>`;
+
+        return;
+    }
+
+    container.innerHTML = "";
+
+    questsCache.forEach(
+        quest => {
+
+            container.appendChild(
+                createQuestCard(quest)
+            );
+        }
+    );
+
+    questsCache.forEach(
+        quest => {
+
+            if (
+                quest.type === "time" &&
+                quest.progress?.status === "active"
+            ) {
+
+                startQuestTimer(quest);
+            }
+        }
+    );
+}
+
+
+/* =========================
+   QUEST CARD
+========================= */
+
+function createQuestCard(
+    quest
+) {
+
+    const card =
+        document.createElement("div");
+
+    const progress =
+        quest.progress || {};
+
+    const status =
+        progress.status || "not_accepted";
+
+    const rewardClaimed =
+        Boolean(
+            progress.reward_claimed ||
+            quest.rewardClaimed
+        );
+
+    if (rewardClaimed) {
+        card.classList.add("claimed");
+    }
+
+    if (status === "completed") {
+        card.classList.add("completed");
+    }
+
+    if (status === "awaiting_review") {
+        card.classList.add("awaiting");
+    }
+
+    card.className =
+        "questCard " +
+        card.className;
+
+    const percent =
+        getQuestPercent(
+            quest,
+            progress
+        );
+
+    const rewards =
+        Array.isArray(quest.rewards)
+            ? quest.rewards
+            : [];
+
+    let rewardHtml = "";
+
+    if (!rewards.length) {
+
+        rewardHtml =
+            `<div class="questReward">
+                Награды нет
+            </div>`;
+
+    } else {
+
+        rewardHtml =
+            rewards.map(
+                reward =>
+                    `<div class="questReward">
+                        • ${escapeHtml(
+                            getQuestRewardText(
+                                reward
+                            )
+                        )}
+                    </div>`
+            ).join("");
+    }
+
+
+    let statusHtml = "";
+
+    if (rewardClaimed) {
+
+        statusHtml =
+            `<div class="questStatus">
+                Награда получена. Задание больше нельзя выполнить повторно.
+            </div>`;
+
+    } else if (status === "not_accepted") {
+
+        statusHtml =
+            `<div class="questStatus">
+                Сначала примите задание.
+            </div>`;
+
+    } else if (status === "awaiting_review") {
+
+        statusHtml =
+            `<div class="questStatus">
+                Ответ отправлен администрации и ожидает проверки.
+            </div>`;
+
+    } else if (status === "completed") {
+
+        statusHtml =
+            `<div class="questStatus">
+                Задание выполнено. Можно получить награду.
+            </div>`;
+
+    } else {
+
+        statusHtml =
+            `<div class="questStatus">
+                Задание выполняется.
+            </div>`;
+    }
+
+
+    let progressBox = "";
+
+    if (
+        status !== "not_accepted" &&
+        !rewardClaimed
+    ) {
+
+        progressBox = `
+            <div class="questProgressBox">
+
+                <div
+                    class="questProgressText"
+                    data-quest-progress-text="${escapeAttr(quest.id)}"
+                >
+                    ${escapeHtml(
+                        formatQuestProgress(
+                            quest,
+                            progress
+                        )
+                    )}
+                </div>
+
+                ${
+                    quest.type === "time"
+                        ? `
+                            <div
+                                class="questTimer"
+                                data-quest-timer="${escapeAttr(quest.id)}"
+                                style="margin-bottom:8px;"
+                            >
+                                ${formatDuration(
+                                    Number(
+                                        progress.progress || 0
+                                    )
+                                )}
+                            </div>
+                        `
+                        : ""
+                }
+
+                <div class="questProgressBar">
+
+                    <div
+                        class="questProgressFill"
+                        style="width:${percent}%"
+                        data-quest-progress-fill="${escapeAttr(quest.id)}"
+                    ></div>
+
+                </div>
+
+            </div>
+        `;
+    }
+
+
+    let actionHtml = "";
+
+    if (rewardClaimed) {
+
+        actionHtml = `
+            <button
+                class="secondary questTextButton"
+                disabled
+            >
+                Награда получена
+            </button>
+        `;
+
+    } else if (status === "not_accepted") {
+
+        actionHtml = `
+            <button
+                class="primary questTextButton"
+                data-quest-accept="${escapeAttr(quest.id)}"
+            >
+                Принимаю
+            </button>
+        `;
+
+    } else if (status === "active") {
+
+        if (quest.type === "link") {
+
+            actionHtml = `
+                <button
+                    class="primary questTextButton"
+                    data-quest-link="${escapeAttr(quest.id)}"
+                >
+                    Перейти по ссылке
+                </button>
+            `;
+
+        } else if (quest.type === "text") {
+
+            actionHtml = `
+                <button
+                    class="primary questTextButton"
+                    data-quest-text="${escapeAttr(quest.id)}"
+                >
+                    Написать ответ
+                </button>
+            `;
+
+        } else {
+
+            actionHtml = `
+                <button
+                    class="secondary questTextButton"
+                    disabled
+                >
+                    Выполняется
+                </button>
+            `;
+        }
+
+    } else if (status === "awaiting_review") {
+
+        actionHtml = `
+            <button
+                class="secondary questTextButton"
+                disabled
+            >
+                На проверке
+            </button>
+        `;
+
+    } else if (status === "completed") {
+
+        actionHtml = `
+            <button
+                class="success questTextButton"
+                data-quest-claim="${escapeAttr(quest.id)}"
+            >
+                Получить награду
+            </button>
+        `;
+    }
+
+
+    card.innerHTML = `
+
+        <div class="questTitle">
+            ${escapeHtml(quest.name)}
+        </div>
+
+        <div class="questType">
+            ${escapeHtml(
+                getQuestTypeName(
+                    quest.type
+                )
+            )}
+        </div>
+
+        <div class="questDescription">
+            ${escapeHtml(
+                quest.description || ""
+            )}
+        </div>
+
+        ${progressBox}
+
+        <div class="questRewards">
+
+            <div class="questRewardsTitle">
+                Награда
+            </div>
+
+            ${rewardHtml}
+
+        </div>
+
+        ${statusHtml}
+
+        ${actionHtml}
+
+    `;
+
+    bindQuestCardEvents(card);
+
+    return card;
+}
+
+
+/* =========================
+   QUEST EVENTS
+========================= */
+
+function bindQuestCardEvents(
+    card
+) {
+
+    const acceptButton =
+        card.querySelector(
+            "[data-quest-accept]"
+        );
+
+    if (acceptButton) {
+
+        acceptButton.addEventListener(
+            "click",
+            async () => {
+
+                const questId =
+                    acceptButton.dataset.questAccept;
+
+                acceptButton.disabled = true;
+
+                try {
+
+                    await api(
+                        "/api/quests/accept",
+                        {
+                            method: "POST",
+
+                            body:
+                                JSON.stringify({
+                                    questId
+                                })
+                        }
+                    );
+
+                    showToast(
+                        "Задание принято",
+                        false
+                    );
+
+                    await loadQuests();
+
+                } catch (error) {
+
+                    showToast(
+                        error.message,
+                        true
+                    );
+
+                    acceptButton.disabled = false;
+                }
+            }
+        );
+    }
+
+
+    const linkButton =
+        card.querySelector(
+            "[data-quest-link]"
+        );
+
+    if (linkButton) {
+
+        linkButton.addEventListener(
+            "click",
+            async () => {
+
+                const questId =
+                    linkButton.dataset.questLink;
+
+                const quest =
+                    questsCache.find(
+                        item =>
+                            String(item.id) ===
+                            String(questId)
+                    );
+
+                if (!quest) {
+                    return;
+                }
+
+                if (!quest.link_url) {
+
+                    showToast(
+                        "У задания нет ссылки",
+                        true
+                    );
+
+                    return;
+                }
+
+                try {
+
+                    window.open(
+                        quest.link_url,
+                        "_blank",
+                        "noopener,noreferrer"
+                    );
+
+                    linkButton.disabled = true;
+
+                    await api(
+                        "/api/quests/link",
+                        {
+                            method: "POST",
+
+                            body:
+                                JSON.stringify({
+                                    questId
+                                })
+                        }
+                    );
+
+                    showToast(
+                        "Задание выполнено",
+                        false
+                    );
+
+                    await loadQuests();
+
+                } catch (error) {
+
+                    showToast(
+                        error.message,
+                        true
+                    );
+
+                    linkButton.disabled = false;
+                }
+            }
+        );
+    }
+
+
+    const textButton =
+        card.querySelector(
+            "[data-quest-text]"
+        );
+
+    if (textButton) {
+
+        textButton.addEventListener(
+            "click",
+            () => {
+
+                const questId =
+                    textButton.dataset.questText;
+
+                openQuestTextModal(
+                    questId
+                );
+            }
+        );
+    }
+
+
+    const claimButton =
+        card.querySelector(
+            "[data-quest-claim]"
+        );
+
+    if (claimButton) {
+
+        claimButton.addEventListener(
+            "click",
+            async () => {
+
+                const questId =
+                    claimButton.dataset.questClaim;
+
+                claimButton.disabled = true;
+
+                try {
+
+                    const data =
+                        await api(
+                            "/api/quests/claim",
+                            {
+                                method: "POST",
+
+                                body:
+                                    JSON.stringify({
+                                        questId
+                                    })
+                            }
+                        );
+
+                    if (
+                        data.redstoneCoins !==
+                        undefined
+                    ) {
+
+                        currentUser.redstoneCoins =
+                            data.redstoneCoins;
+
+                        updateBalance();
+                    }
+
+                    showToast(
+                        "Награда получена",
+                        false
+                    );
+
+                    await refreshMe();
+                    await loadQuests();
+                    await loadInventory();
+
+                } catch (error) {
+
+                    showToast(
+                        error.message,
+                        true
+                    );
+
+                    claimButton.disabled = false;
+                }
+            }
+        );
+    }
+}
+
+
+/* =========================
+   TEXT QUEST MODAL
+========================= */
+
+function openQuestTextModal(
+    questId
+) {
+
+    const quest =
+        questsCache.find(
+            item =>
+                String(item.id) ===
+                String(questId)
+        );
+
+    if (!quest) {
+        return;
+    }
+
+    document
+        .getElementById("modalTitle")
+        .textContent =
+            "Ответ на задание";
+
+    const content =
+        document.getElementById(
+            "modalContent"
+        );
+
+    content.innerHTML = "";
+
+    const description =
+        document.createElement("div");
+
+    description.style.whiteSpace =
+        "pre-wrap";
+
+    description.style.color =
+        "#c8c8d0";
+
+    description.style.lineHeight =
+        "1.5";
+
+    description.style.marginBottom =
+        "14px";
+
+    description.textContent =
+        quest.description || "";
+
+    const label =
+        document.createElement("div");
+
+    label.textContent =
+        "Ваш ответ:";
+
+    label.style.marginBottom =
+        "7px";
+
+    const textarea =
+        document.createElement(
+            "textarea"
+        );
+
+    textarea.placeholder =
+        "Введите ответ...";
+
+    textarea.maxLength =
+        10000;
+
+    content.appendChild(
+        description
+    );
+
+    content.appendChild(
+        label
+    );
+
+    content.appendChild(
+        textarea
+    );
+
+    modalAction =
+        async () => {
+
+            const text =
+                textarea.value.trim();
+
+            if (!text) {
+
+                showToast(
+                    "Введите ответ",
+                    true
+                );
+
+                return;
+            }
+
+            try {
+
+                await api(
+                    "/api/quests/text",
+                    {
+                        method: "POST",
+
+                        body:
+                            JSON.stringify({
+                                questId,
+                                text
+                            })
+                    }
+                );
+
+                showToast(
+                    "Ответ отправлен на проверку",
+                    false
+                );
+
+                await loadQuests();
+
+            } catch (error) {
+
+                showToast(
+                    error.message,
+                    true
+                );
+            }
+        };
+
+    document
+        .getElementById(
+            "modalOverlay"
+        )
+        .classList.remove("hidden");
+
+    textarea.focus();
+}
+
+
+/* =========================================================
    ADMIN
+========================================================= */
+
+
+/* =========================
+   ADMIN MAIN
 ========================= */
 
 async function loadAdmin() {
@@ -3727,12 +5266,18 @@ async function loadAdmin() {
     await Promise.all([
         loadAdminUsers(),
         loadAdminItems(),
-        loadAdminWithdrawals()
+        loadAdminWithdrawals(),
+        loadAdminQuests(),
+        loadAdminQuestSubmissions()
     ]);
 
     await fillGiveItemSelect();
 }
 
+
+/* =========================
+   ADMIN USERS
+========================= */
 
 async function loadAdminUsers() {
 
@@ -3821,6 +5366,1299 @@ async function loadAdminUsers() {
 }
 
 
+/* =========================================================
+   ADMIN QUESTS
+========================================================= */
+
+
+/* =========================
+   ADMIN QUEST TYPE UI
+========================= */
+
+document
+    .getElementById("adminQuestType")
+    .addEventListener(
+        "change",
+        updateQuestEditorFields
+    );
+
+
+function updateQuestEditorFields() {
+
+    const type =
+        document.getElementById(
+            "adminQuestType"
+        ).value;
+
+    const conditionGroup =
+        document.getElementById(
+            "adminQuestConditionGroup"
+        );
+
+    const conditionLabel =
+        document.getElementById(
+            "adminQuestConditionLabel"
+        );
+
+    const conditionInput =
+        document.getElementById(
+            "adminQuestCondition"
+        );
+
+    const linkGroup =
+        document.getElementById(
+            "adminQuestLinkGroup"
+        );
+
+
+    linkGroup.classList.add("hidden");
+
+
+    if (type === "trades") {
+
+        conditionGroup.classList.remove(
+            "hidden"
+        );
+
+        conditionLabel.textContent =
+            "Количество трейдов";
+
+        conditionInput.min = "1";
+
+    } else if (type === "time") {
+
+        conditionGroup.classList.remove(
+            "hidden"
+        );
+
+        conditionLabel.textContent =
+            "Время в секундах";
+
+        conditionInput.min = "1";
+
+    } else if (type === "link") {
+
+        conditionGroup.classList.add(
+            "hidden"
+        );
+
+        linkGroup.classList.remove(
+            "hidden"
+        );
+
+    } else if (type === "text") {
+
+        conditionGroup.classList.add(
+            "hidden"
+        );
+    }
+}
+
+
+/* =========================
+   QUEST REWARD EDITOR
+========================= */
+
+function createQuestRewardEditor(
+    reward = null
+) {
+
+    const wrapper =
+        document.createElement(
+            "div"
+        );
+
+    wrapper.className =
+        "rewardEditor";
+
+    const rewardType =
+        reward?.reward_type ||
+        reward?.type ||
+        "coins";
+
+    const coins =
+        Number(
+            reward?.coins || 0
+        );
+
+    const itemId =
+        reward?.item_id ||
+        "";
+
+    wrapper.innerHTML = `
+
+        <div class="rewardEditorRow">
+
+            <div class="formGroup">
+
+                <label>
+                    Тип
+                </label>
+
+                <select class="questRewardType">
+
+                    <option
+                        value="coins"
+                        ${rewardType === "coins" ? "selected" : ""}
+                    >
+                        RC
+                    </option>
+
+                    <option
+                        value="item"
+                        ${rewardType === "item" ? "selected" : ""}
+                    >
+                        Предмет
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div
+                class="formGroup questRewardValueBox"
+            ></div>
+
+
+            <button
+                class="danger questRemoveReward"
+                type="button"
+            >
+                Удалить
+            </button>
+
+        </div>
+    `;
+
+    const typeSelect =
+        wrapper.querySelector(
+            ".questRewardType"
+        );
+
+    const valueBox =
+        wrapper.querySelector(
+            ".questRewardValueBox"
+        );
+
+    function renderValue() {
+
+        if (
+            typeSelect.value ===
+            "coins"
+        ) {
+
+            valueBox.innerHTML = `
+
+                <label>
+                    Количество RC
+                </label>
+
+                <input
+                    class="questRewardCoins"
+                    type="number"
+                    min="1"
+                    value="${coins || 1}"
+                >
+            `;
+
+        } else {
+
+            valueBox.innerHTML = `
+
+                <label>
+                    Предмет
+                </label>
+
+                <select class="questRewardItem">
+                    ${renderQuestRewardItems(
+                        itemId
+                    )}
+                </select>
+            `;
+        }
+    }
+
+    typeSelect.addEventListener(
+        "change",
+        renderValue
+    );
+
+    wrapper
+        .querySelector(
+            ".questRemoveReward"
+        )
+        .addEventListener(
+            "click",
+            () => {
+                wrapper.remove();
+            }
+        );
+
+    renderValue();
+
+    return wrapper;
+}
+
+
+function renderQuestRewardItems(
+    selectedId = ""
+) {
+
+    if (!adminItemsCache.length) {
+
+        return `
+            <option value="">
+                Нет предметов
+            </option>
+        `;
+    }
+
+    return adminItemsCache.map(
+        item => `
+            <option
+                value="${escapeAttr(item.id)}"
+                ${
+                    String(item.id) ===
+                    String(selectedId)
+                        ? "selected"
+                        : ""
+                }
+            >
+                ${escapeHtml(item.name)}
+                (#${escapeHtml(item.id)})
+                ${
+                    !Boolean(item.on_sale)
+                        ? " - снят с продажи"
+                        : ""
+                }
+            </option>
+        `
+    ).join("");
+}
+
+
+function addQuestRewardEditor(
+    reward = null
+) {
+
+    const container =
+        document.getElementById(
+            "adminQuestRewards"
+        );
+
+    container.appendChild(
+        createQuestRewardEditor(
+            reward
+        )
+    );
+}
+
+
+document
+    .getElementById(
+        "addQuestRewardButton"
+    )
+    .addEventListener(
+        "click",
+        () => {
+            addQuestRewardEditor();
+        }
+    );
+
+
+function getQuestEditorRewards() {
+
+    const editors =
+        [
+            ...document.querySelectorAll(
+                "#adminQuestRewards .rewardEditor"
+            )
+        ];
+
+    return editors.map(
+        editor => {
+
+            const type =
+                editor.querySelector(
+                    ".questRewardType"
+                ).value;
+
+            if (type === "coins") {
+
+                return {
+                    reward_type: "coins",
+                    coins: Number(
+                        editor.querySelector(
+                            ".questRewardCoins"
+                        ).value
+                    )
+                };
+
+            }
+
+            return {
+                reward_type: "item",
+                item_id:
+                    editor.querySelector(
+                        ".questRewardItem"
+                    ).value
+            };
+        }
+    );
+}
+
+
+/* =========================
+   ADMIN LOAD QUESTS
+========================= */
+
+async function loadAdminQuests() {
+
+    const container =
+        document.getElementById(
+            "adminQuestsList"
+        );
+
+    const data =
+        await api(
+            "/api/admin/quests"
+        );
+
+    const quests =
+        data.quests || [];
+
+    if (!quests.length) {
+
+        container.innerHTML =
+            `<div class="empty">
+                Заданий пока нет.
+            </div>`;
+
+        return;
+    }
+
+    container.innerHTML = "";
+
+    quests.forEach(
+        quest => {
+
+            const box =
+                document.createElement(
+                    "div"
+                );
+
+            box.className =
+                "card";
+
+            let conditionText = "";
+
+            if (quest.type === "trades") {
+
+                conditionText =
+                    "Требуется трейдов: " +
+                    Number(
+                        quest.condition_value
+                    );
+
+            } else if (quest.type === "time") {
+
+                conditionText =
+                    "Время: " +
+                    formatDuration(
+                        quest.condition_value
+                    );
+
+            } else if (quest.type === "link") {
+
+                conditionText =
+                    "Ссылка: " +
+                    (quest.link_url || "не указана");
+
+            } else {
+
+                conditionText =
+                    "Требуется текстовый ответ";
+            }
+
+
+            const rewards =
+                Array.isArray(
+                    quest.rewards
+                )
+                    ? quest.rewards
+                    : [];
+
+
+            box.innerHTML = `
+
+                <div class="itemName">
+                    ${escapeHtml(
+                        quest.name
+                    )}
+                </div>
+
+                <div class="itemMeta">
+                    Тип:
+                    ${escapeHtml(
+                        getQuestTypeName(
+                            quest.type
+                        )
+                    )}
+                </div>
+
+                <div
+                    class="questDescription"
+                    style="margin-bottom:10px;"
+                >
+                    ${escapeHtml(
+                        quest.description || ""
+                    )}
+                </div>
+
+                <div class="itemMeta">
+                    ${escapeHtml(
+                        conditionText
+                    )}
+                </div>
+
+                <div class="questRewards">
+
+                    <div class="questRewardsTitle">
+                        Награды
+                    </div>
+
+                    ${
+                        rewards.length
+                            ? rewards.map(
+                                reward =>
+                                    `<div class="questReward">
+                                        • ${escapeHtml(
+                                            getQuestRewardText(
+                                                reward
+                                            )
+                                        )}
+                                    </div>`
+                              ).join("")
+                            : `
+                                <div class="questReward">
+                                    Награды нет
+                                </div>
+                            `
+                    }
+
+                </div>
+
+                <div class="questAdminActions">
+
+                    <button
+                        class="secondary"
+                        data-admin-edit-quest="${escapeAttr(
+                            quest.id
+                        )}"
+                    >
+                        Изменить
+                    </button>
+
+                    <button
+                        class="danger"
+                        data-admin-delete-quest="${escapeAttr(
+                            quest.id
+                        )}"
+                    >
+                        Удалить
+                    </button>
+
+                </div>
+            `;
+
+            container.appendChild(box);
+        }
+    );
+
+
+    container
+        .querySelectorAll(
+            "[data-admin-edit-quest]"
+        )
+        .forEach(button => {
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    const quest =
+                        quests.find(
+                            item =>
+                                String(
+                                    item.id
+                                ) ===
+                                String(
+                                    button.dataset
+                                        .adminEditQuest
+                                )
+                        );
+
+                    if (quest) {
+                        startQuestEditing(
+                            quest
+                        );
+                    }
+                }
+            );
+        });
+
+
+    container
+        .querySelectorAll(
+            "[data-admin-delete-quest]"
+        )
+        .forEach(button => {
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    const questId =
+                        button.dataset
+                            .adminDeleteQuest;
+
+                    confirmModal(
+                        "Удалить задание",
+                        "Задание, его прогресс и ответы будут удалены.",
+                        async () => {
+
+                            try {
+
+                                await api(
+                                    "/api/admin/quests/delete",
+                                    {
+                                        method: "DELETE",
+
+                                        body:
+                                            JSON.stringify({
+                                                questId
+                                            })
+                                    }
+                                );
+
+                                showToast(
+                                    "Задание удалено",
+                                    false
+                                );
+
+                                if (
+                                    String(
+                                        editingQuestId
+                                    ) ===
+                                    String(
+                                        questId
+                                    )
+                                ) {
+                                    resetQuestEditor();
+                                }
+
+                                await loadAdminQuests();
+                                await loadQuests();
+
+                            } catch (error) {
+
+                                showToast(
+                                    error.message,
+                                    true
+                                );
+                            }
+                        }
+                    );
+                }
+            );
+        });
+}
+
+
+/* =========================
+   QUEST EDITOR
+========================= */
+
+function startQuestEditing(
+    quest
+) {
+
+    editingQuestId =
+        quest.id;
+
+    document
+        .getElementById(
+            "questEditorTitle"
+        )
+        .textContent =
+            "Изменить задание";
+
+    document
+        .getElementById(
+            "adminQuestName"
+        )
+        .value =
+            quest.name || "";
+
+    document
+        .getElementById(
+            "adminQuestDescription"
+        )
+        .value =
+            quest.description || "";
+
+    document
+        .getElementById(
+            "adminQuestType"
+        )
+        .value =
+            quest.type || "trades";
+
+    document
+        .getElementById(
+            "adminQuestCondition"
+        )
+        .value =
+            Number(
+                quest.condition_value || 1
+            );
+
+    document
+        .getElementById(
+            "adminQuestLink"
+        )
+        .value =
+            quest.link_url || "";
+
+    updateQuestEditorFields();
+
+    const rewardsContainer =
+        document.getElementById(
+            "adminQuestRewards"
+        );
+
+    rewardsContainer.innerHTML = "";
+
+    const rewards =
+        Array.isArray(
+            quest.rewards
+        )
+            ? quest.rewards
+            : [];
+
+    if (rewards.length) {
+
+        rewards.forEach(
+            reward =>
+                addQuestRewardEditor(
+                    reward
+                )
+        );
+
+    } else {
+
+        addQuestRewardEditor();
+    }
+
+    document
+        .getElementById(
+            "saveQuestButton"
+        )
+        .textContent =
+            "Сохранить изменения";
+
+    document
+        .getElementById(
+            "cancelQuestEditButton"
+        )
+        .classList.remove(
+            "hidden"
+        );
+}
+
+
+function resetQuestEditor() {
+
+    editingQuestId = null;
+
+    document
+        .getElementById(
+            "questEditorTitle"
+        )
+        .textContent =
+            "Добавить задание";
+
+    document
+        .getElementById(
+            "adminQuestName"
+        )
+        .value = "";
+
+    document
+        .getElementById(
+            "adminQuestDescription"
+        )
+        .value = "";
+
+    document
+        .getElementById(
+            "adminQuestType"
+        )
+        .value =
+            "trades";
+
+    document
+        .getElementById(
+            "adminQuestCondition"
+        )
+        .value =
+            "1";
+
+    document
+        .getElementById(
+            "adminQuestLink"
+        )
+        .value = "";
+
+    document
+        .getElementById(
+            "adminQuestRewards"
+        )
+        .innerHTML = "";
+
+    document
+        .getElementById(
+            "saveQuestButton"
+        )
+        .textContent =
+            "Создать задание";
+
+    document
+        .getElementById(
+            "cancelQuestEditButton"
+        )
+        .classList.add(
+            "hidden"
+        );
+
+    updateQuestEditorFields();
+
+    addQuestRewardEditor();
+}
+
+
+document
+    .getElementById(
+        "cancelQuestEditButton"
+    )
+    .addEventListener(
+        "click",
+        resetQuestEditor
+    );
+
+
+/* =========================
+   SAVE QUEST
+========================= */
+
+document
+    .getElementById(
+        "saveQuestButton"
+    )
+    .addEventListener(
+        "click",
+        async () => {
+
+            const button =
+                document.getElementById(
+                    "saveQuestButton"
+                );
+
+            const name =
+                document
+                    .getElementById(
+                        "adminQuestName"
+                    )
+                    .value
+                    .trim();
+
+            const description =
+                document
+                    .getElementById(
+                        "adminQuestDescription"
+                    )
+                    .value;
+
+            const type =
+                document
+                    .getElementById(
+                        "adminQuestType"
+                    )
+                    .value;
+
+            const conditionValue =
+                Number(
+                    document
+                        .getElementById(
+                            "adminQuestCondition"
+                        )
+                        .value
+                );
+
+            const linkUrl =
+                document
+                    .getElementById(
+                        "adminQuestLink"
+                    )
+                    .value
+                    .trim();
+
+            const rewards =
+                getQuestEditorRewards();
+
+
+            if (!name) {
+
+                showToast(
+                    "Введите название задания",
+                    true
+                );
+
+                return;
+            }
+
+
+            if (
+                type === "trades" &&
+                (!Number.isFinite(conditionValue) ||
+                 conditionValue < 1)
+            ) {
+
+                showToast(
+                    "Укажите количество трейдов",
+                    true
+                );
+
+                return;
+            }
+
+
+            if (
+                type === "time" &&
+                (!Number.isFinite(conditionValue) ||
+                 conditionValue < 1)
+            ) {
+
+                showToast(
+                    "Укажите время в секундах",
+                    true
+                );
+
+                return;
+            }
+
+
+            if (
+                type === "link" &&
+                !linkUrl
+            ) {
+
+                showToast(
+                    "Укажите ссылку",
+                    true
+                );
+
+                return;
+            }
+
+
+            if (!rewards.length) {
+
+                showToast(
+                    "Добавьте хотя бы одну награду",
+                    true
+                );
+
+                return;
+            }
+
+
+            for (
+                const reward of rewards
+            ) {
+
+                if (
+                    reward.reward_type ===
+                    "coins"
+                ) {
+
+                    if (
+                        !Number.isFinite(
+                            Number(
+                                reward.coins
+                            )
+                        ) ||
+                        Number(
+                            reward.coins
+                        ) < 1
+                    ) {
+
+                        showToast(
+                            "Количество RC должно быть больше 0",
+                            true
+                        );
+
+                        return;
+                    }
+
+                } else {
+
+                    if (
+                        !reward.item_id
+                    ) {
+
+                        showToast(
+                            "Выберите предмет для награды",
+                            true
+                        );
+
+                        return;
+                    }
+                }
+            }
+
+
+            button.disabled = true;
+
+            try {
+
+                const payload = {
+                    name,
+                    description,
+                    type,
+                    conditionValue:
+                        type === "link" ||
+                        type === "text"
+                            ? 0
+                            : conditionValue,
+                    linkUrl:
+                        type === "link"
+                            ? linkUrl
+                            : null,
+                    rewards
+                };
+
+
+                if (editingQuestId) {
+
+                    payload.questId =
+                        editingQuestId;
+
+                    await api(
+                        "/api/admin/quests/edit",
+                        {
+                            method: "POST",
+
+                            body:
+                                JSON.stringify(
+                                    payload
+                                )
+                        }
+                    );
+
+                    showToast(
+                        "Задание изменено",
+                        false
+                    );
+
+                } else {
+
+                    await api(
+                        "/api/admin/quests/create",
+                        {
+                            method: "POST",
+
+                            body:
+                                JSON.stringify(
+                                    payload
+                                )
+                        }
+                    );
+
+                    showToast(
+                        "Задание создано",
+                        false
+                    );
+                }
+
+
+                resetQuestEditor();
+
+                await loadAdminQuests();
+                await loadQuests();
+
+            } catch (error) {
+
+                showToast(
+                    error.message,
+                    true
+                );
+
+            } finally {
+
+                button.disabled = false;
+            }
+        }
+    );
+
+
+/* =========================================================
+   ADMIN QUEST SUBMISSIONS
+========================================================= */
+
+async function loadAdminQuestSubmissions() {
+
+    const container =
+        document.getElementById(
+            "adminQuestSubmissions"
+        );
+
+    const data =
+        await api(
+            "/api/admin/quests/submissions"
+        );
+
+    const submissions =
+        data.submissions || [];
+
+    if (!submissions.length) {
+
+        container.innerHTML =
+            `<div class="empty">
+                Ответов на проверку нет.
+            </div>`;
+
+        return;
+    }
+
+    container.innerHTML = "";
+
+    submissions.forEach(
+        submission => {
+
+            const box =
+                document.createElement(
+                    "div"
+                );
+
+            box.className =
+                "questSubmission";
+
+            const status =
+                submission.status ||
+                "pending";
+
+            const statusText =
+                status === "pending"
+                    ? "Ожидает проверки"
+                    : status === "approved"
+                        ? "Одобрено"
+                        : "Отклонено";
+
+
+            let actions = "";
+
+            if (
+                status === "pending"
+            ) {
+
+                actions = `
+
+                    <div
+                        style="
+                            display:flex;
+                            gap:8px;
+                            flex-wrap:wrap;
+                        "
+                    >
+
+                        <button
+                            class="success"
+                            data-approve-submission="${escapeAttr(
+                                submission.id
+                            )}"
+                        >
+                            Одобрить
+                        </button>
+
+                        <button
+                            class="danger"
+                            data-reject-submission="${escapeAttr(
+                                submission.id
+                            )}"
+                        >
+                            Отклонить
+                        </button>
+
+                    </div>
+                `;
+            }
+
+
+            box.innerHTML = `
+
+                <div class="messageTitle">
+                    ${escapeHtml(
+                        submission.quest_name ||
+                        "Задание"
+                    )}
+                </div>
+
+                <div class="itemMeta">
+                    Игрок:
+                    ${escapeHtml(
+                        submission.minecraft_nick ||
+                        submission.user_nick ||
+                        "Неизвестно"
+                    )}
+                </div>
+
+                <div class="itemMeta">
+                    Статус:
+                    ${escapeHtml(
+                        statusText
+                    )}
+                </div>
+
+                <div class="questSubmissionText">
+                    ${escapeHtml(
+                        submission.text || ""
+                    )}
+                </div>
+
+                ${actions}
+
+                <div class="messageDate">
+                    ${formatDate(
+                        submission.created_at
+                    )}
+                </div>
+            `;
+
+            container.appendChild(box);
+        }
+    );
+
+
+    container
+        .querySelectorAll(
+            "[data-approve-submission]"
+        )
+        .forEach(button => {
+
+            button.addEventListener(
+                "click",
+                async () => {
+
+                    const submissionId =
+                        button.dataset
+                            .approveSubmission;
+
+                    button.disabled = true;
+
+                    try {
+
+                        await api(
+                            "/api/admin/quests/submissions/approve",
+                            {
+                                method: "POST",
+
+                                body:
+                                    JSON.stringify({
+                                        submissionId
+                                    })
+                            }
+                        );
+
+                        showToast(
+                            "Ответ одобрен",
+                            false
+                        );
+
+                        await loadAdminQuestSubmissions();
+
+                    } catch (error) {
+
+                        showToast(
+                            error.message,
+                            true
+                        );
+
+                        button.disabled = false;
+                    }
+                }
+            );
+        });
+
+
+    container
+        .querySelectorAll(
+            "[data-reject-submission]"
+        )
+        .forEach(button => {
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    const submissionId =
+                        button.dataset
+                            .rejectSubmission;
+
+                    confirmModal(
+                        "Отклонить ответ",
+                        "Игрок сможет отправить ответ повторно.",
+                        async () => {
+
+                            try {
+
+                                await api(
+                                    "/api/admin/quests/submissions/reject",
+                                    {
+                                        method: "POST",
+
+                                        body:
+                                            JSON.stringify({
+                                                submissionId
+                                            })
+                                    }
+                                );
+
+                                showToast(
+                                    "Ответ отклонён",
+                                    false
+                                );
+
+                                await loadAdminQuestSubmissions();
+
+                                await loadQuests();
+
+                            } catch (error) {
+
+                                showToast(
+                                    error.message,
+                                    true
+                                );
+                            }
+                        }
+                    );
+                }
+            );
+        });
+}
+
+
 /* =========================
    ADMIN ITEMS
 ========================= */
@@ -3897,6 +6735,9 @@ async function loadAdminItems() {
 
     const items =
         data.items || [];
+
+    adminItemsCache =
+        items;
 
     const activeItems =
         items.filter(
@@ -4405,6 +7246,9 @@ async function fillGiveItemSelect() {
     const items =
         data.items || [];
 
+    adminItemsCache =
+        items;
+
     select.innerHTML = "";
 
     items.forEach(item => {
@@ -4418,7 +7262,11 @@ async function fillGiveItemSelect() {
             item.id;
 
         option.textContent =
-            `${item.name} (#${item.id})`;
+            `${item.name} (#${item.id})${
+                !Boolean(item.on_sale)
+                    ? " - снят с продажи"
+                    : ""
+            }`;
 
         select.appendChild(option);
     });
@@ -5061,6 +7909,22 @@ function formatDate(value) {
         "ru-RU"
     );
 }
+
+
+/* =========================
+   FIRST QUEST EDITOR SETUP
+========================= */
+
+updateQuestEditorFields();
+
+if (
+    !document.querySelector(
+        "#adminQuestRewards .rewardEditor"
+    )
+) {
+    addQuestRewardEditor();
+}
+
 </script>
 
 </body>
