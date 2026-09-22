@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -424,6 +425,103 @@ textarea {
 }
 
 /* =========================
+   MESSAGE TRADE
+========================= */
+
+.messageTradeText {
+    color: #c8c8d0;
+    line-height: 1.5;
+    margin-bottom: 14px;
+}
+
+.messageTradeWindows {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 12px;
+}
+
+.messageTradeWindow {
+    background: #101017;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px;
+    min-width: 0;
+}
+
+.messageTradeWindowTitle {
+    font-weight: 700;
+    font-size: 14px;
+    margin-bottom: 10px;
+    color: #e9e9ef;
+}
+
+.messageTradeItems {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 8px;
+}
+
+.messageTradeItem {
+    background: #171720;
+    border: 1px solid #292936;
+    border-radius: 8px;
+    padding: 8px;
+    min-width: 0;
+}
+
+.messageTradeItemIcon {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto 7px;
+    border-radius: 7px;
+    background: #0c0c11;
+    border: 1px solid #24242e;
+}
+
+.messageTradeItemName {
+    font-size: 12px;
+    font-weight: 700;
+    text-align: center;
+    line-height: 1.25;
+    overflow-wrap: anywhere;
+}
+
+.messageTradeItemPrice {
+    color: var(--yellow);
+    font-size: 11px;
+    text-align: center;
+    margin-top: 4px;
+}
+
+.messageTradeEmpty {
+    color: var(--muted);
+    font-size: 12px;
+    text-align: center;
+    padding: 14px 6px;
+}
+
+.messageTradeActions {
+    display: flex;
+    gap: 8px;
+    margin-top: 14px;
+}
+
+.messageTradeActions button {
+    flex: 1;
+}
+
+.messageTradeStatus {
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: 12px;
+    padding-top: 11px;
+    border-top: 1px solid var(--border);
+}
+
+/* =========================
    TABLE
 ========================= */
 
@@ -703,6 +801,10 @@ tr:last-child td {
 @media (max-width: 800px) {
 
     .tradeWindows {
+        grid-template-columns: 1fr;
+    }
+
+    .messageTradeWindows {
         grid-template-columns: 1fr;
     }
 }
@@ -2493,17 +2595,147 @@ async function loadMessages() {
 
         box.className = "message";
 
+        /*
+         * Новые trade-сообщения от Worker
+         * хранят объект JSON в message.content.
+         *
+         * Старые сообщения могут содержать
+         * обычный текст, поэтому при ошибке
+         * разбора мы просто показываем текст.
+         */
+
+        let tradeData = null;
+
+        if (message.type === "trade") {
+
+            try {
+
+                const parsed =
+                    JSON.parse(
+                        message.content || ""
+                    );
+
+                if (
+                    parsed &&
+                    parsed.tradeId &&
+                    Array.isArray(parsed.senderItems) &&
+                    Array.isArray(parsed.receiverItems)
+                ) {
+                    tradeData = parsed;
+                }
+
+            } catch {
+                tradeData = null;
+            }
+        }
+
+
+        if (!tradeData) {
+
+            box.innerHTML = `
+                <div class="messageTitle">
+                    ${escapeHtml(
+                        message.title || "Сообщение"
+                    )}
+                </div>
+
+                <div class="messageContent">
+                    ${escapeHtml(
+                        message.content || ""
+                    )}
+                </div>
+
+                <div class="messageDate">
+                    ${formatDate(
+                        message.created_at
+                    )}
+                </div>
+            `;
+
+            container.appendChild(box);
+
+            return;
+        }
+
+
+        const senderItemsHtml =
+            renderMessageTradeItems(
+                tradeData.senderItems
+            );
+
+        const receiverItemsHtml =
+            renderMessageTradeItems(
+                tradeData.receiverItems
+            );
+
+
         box.innerHTML = `
             <div class="messageTitle">
-                ${escapeHtml(
-                    message.title || "Сообщение"
-                )}
+                Новый обмен
             </div>
 
-            <div class="messageContent">
-                ${escapeHtml(
-                    message.content || ""
-                )}
+            <div class="messageTradeText">
+                <b>
+                    ${escapeHtml(
+                        tradeData.senderNick ||
+                        "Игрок"
+                    )}
+                </b>
+                предложил вам обмен
+            </div>
+
+            <div class="messageTradeWindows">
+
+                <div class="messageTradeWindow">
+
+                    <div class="messageTradeWindowTitle">
+                        ${escapeHtml(
+                            tradeData.senderNick ||
+                            "Игрок"
+                        )} отдаёт
+                    </div>
+
+                    <div class="messageTradeItems">
+                        ${senderItemsHtml}
+                    </div>
+
+                </div>
+
+
+                <div class="messageTradeWindow">
+
+                    <div class="messageTradeWindowTitle">
+                        Вы отдаёте
+                    </div>
+
+                    <div class="messageTradeItems">
+                        ${receiverItemsHtml}
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="messageTradeActions">
+
+                <button
+                    class="success"
+                    data-message-accept-trade="${escapeAttr(
+                        tradeData.tradeId
+                    )}"
+                >
+                    Принять
+                </button>
+
+                <button
+                    class="danger"
+                    data-message-decline-trade="${escapeAttr(
+                        tradeData.tradeId
+                    )}"
+                >
+                    Отклонить
+                </button>
+
             </div>
 
             <div class="messageDate">
@@ -2515,6 +2747,183 @@ async function loadMessages() {
 
         container.appendChild(box);
     });
+
+
+    container
+        .querySelectorAll(
+            "[data-message-accept-trade]"
+        )
+        .forEach(button => {
+
+            button.addEventListener(
+                "click",
+                async () => {
+
+                    const tradeId =
+                        button.dataset
+                            .messageAcceptTrade;
+
+                    button.disabled = true;
+
+                    try {
+
+                        await api(
+                            "/api/trades/accept",
+                            {
+                                method: "POST",
+
+                                body:
+                                    JSON.stringify({
+                                        tradeId
+                                    })
+                            }
+                        );
+
+                        showToast(
+                            "Трейд принят",
+                            false
+                        );
+
+                        await refreshMe();
+
+                        await Promise.all([
+                            loadMessages(),
+                            loadTrades(),
+                            loadInventory(),
+                            loadTradeItems()
+                        ]);
+
+                    } catch (error) {
+
+                        showToast(
+                            error.message,
+                            true
+                        );
+
+                        button.disabled = false;
+                    }
+                }
+            );
+        });
+
+
+    container
+        .querySelectorAll(
+            "[data-message-decline-trade]"
+        )
+        .forEach(button => {
+
+            button.addEventListener(
+                "click",
+                async () => {
+
+                    const tradeId =
+                        button.dataset
+                            .messageDeclineTrade;
+
+                    button.disabled = true;
+
+                    try {
+
+                        await api(
+                            "/api/trades/decline",
+                            {
+                                method: "POST",
+
+                                body:
+                                    JSON.stringify({
+                                        tradeId
+                                    })
+                            }
+                        );
+
+                        showToast(
+                            "Трейд отклонён",
+                            false
+                        );
+
+                        await Promise.all([
+                            loadMessages(),
+                            loadTrades()
+                        ]);
+
+                    } catch (error) {
+
+                        showToast(
+                            error.message,
+                            true
+                        );
+
+                        button.disabled = false;
+                    }
+                }
+            );
+        });
+}
+
+
+/*
+ * Рисует предметы внутри сообщения-трейда.
+ * Здесь нет кнопок и ID - это только
+ * визуальная копия предложения.
+ */
+
+function renderMessageTradeItems(items) {
+
+    if (!Array.isArray(items) || !items.length) {
+
+        return `
+            <div class="messageTradeEmpty">
+                Ничего не предлагает
+            </div>
+        `;
+    }
+
+    return items.map(item => {
+
+        const icon =
+            normalizeIconUrl(item.icon);
+
+        return `
+            <div class="messageTradeItem">
+
+                ${
+                    icon
+                        ? `
+                            <img
+                                class="messageTradeItemIcon"
+                                src="${escapeAttr(icon)}"
+                                alt=""
+                                onerror="this.style.visibility='hidden'"
+                            >
+                        `
+                        : `
+                            <div class="messageTradeItemIcon"></div>
+                        `
+                }
+
+                <div class="messageTradeItemName">
+                    ${escapeHtml(
+                        item.name || "Предмет"
+                    )}
+                </div>
+
+                ${
+                    item.price !== undefined
+                        ? `
+                            <div class="messageTradeItemPrice">
+                                ${Number(
+                                    item.price || 0
+                                ).toLocaleString("ru-RU")} RC
+                            </div>
+                        `
+                        : ""
+                }
+
+            </div>
+        `;
+
+    }).join("");
 }
 
 
@@ -3027,7 +3436,7 @@ async function loadTrades() {
 
         box.innerHTML = `
             <div class="messageTitle">
-                Трейд #${escapeHtml(trade.id)}
+                Трейд
             </div>
 
             <div class="messageContent">
@@ -4657,3 +5066,4 @@ function formatDate(value) {
 
 </body>
 </html>
+```
